@@ -6,7 +6,7 @@ const index = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.push('/home')
+    router.replace('/dashboard')
   }, [])
 
   return null

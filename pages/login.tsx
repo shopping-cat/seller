@@ -4,7 +4,7 @@ import { auth } from '../lib/firebase'
 const login = () => {
 
     useEffect(() => {
-        auth.signOut()
+        // auth.signInWithEmailAndPassword('123@gmail.com', '123123')
     }, [])
 
 
