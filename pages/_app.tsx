@@ -2,7 +2,7 @@ import { ApolloProvider } from '@apollo/client'
 import firebase from 'firebase'
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/dist/client/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import { client } from '../lib/apollo'
 import { auth } from '../lib/firebase'
@@ -28,19 +28,15 @@ export default App
 
 const AppContainer: React.FC = ({ children }) => {
 
-  const { replace } = useRouter()
+  const { replace, asPath } = useRouter()
+  const [logedIn, setLogedIn] = useState(false)
 
   const onAuthStateChanged = async (user: firebase.User) => {
-    try {
-      if (user) {
-        console.log('logged in')
-        replace('/dashboard')
-      } else {
-        console.log('logged out')
-        replace('/login')
-      }
-    } catch (error) {
-      console.log(error)
+    setLogedIn(!!user)
+    if (!user) {
+      replace('/login')
+    } else if (user && asPath === '/login') {
+      replace('/dashboard')
     }
   }
 
@@ -49,6 +45,8 @@ const AppContainer: React.FC = ({ children }) => {
     const loginListner = auth.onAuthStateChanged(onAuthStateChanged)
     return loginListner
   }, [])
+
+  if (!logedIn && asPath !== '/login') return null
 
   return (
     <>

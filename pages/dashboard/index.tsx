@@ -1,6 +1,6 @@
 import React from 'react'
-import Layout from '../components/Layout'
-import { useItem } from '../graphql/item'
+import Layout from '../../components/Layout'
+import { useItem } from '../../graphql/item'
 
 const dashboard = () => {
     const { data } = useItem({ variables: { id: 1 } })

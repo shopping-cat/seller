@@ -9,6 +9,9 @@ import {
     TeamOutlined,
     UserOutlined,
     ShopOutlined,
+    MessageOutlined,
+    ShoppingOutlined,
+    DollarCircleOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useRouter } from 'next/dist/client/router';
@@ -71,12 +74,15 @@ const CollapsedTitle = styled.a`
 const menuItems = [
     { route: 'dashboard', name: '대시보드', icon: <PieChartOutlined /> },
     { route: 'order', name: '주문관리', icon: <DesktopOutlined /> },
+    { route: 'inquery', name: '문의관리', icon: <MessageOutlined /> },
     { route: 'shop', name: '상점관리', icon: <ShopOutlined /> },
+    { route: 'item', name: '상품관리', icon: <ShoppingOutlined /> },
+    { route: 'profit', name: '수익관리', icon: <DollarCircleOutlined /> },
 ]
 
 const Layout: React.FC = ({ children }) => {
 
-    const { route, push } = useRouter()
+    const { asPath, push } = useRouter()
 
     const [collapsed, setCollapsed] = useState(false)
 
@@ -88,19 +94,19 @@ const Layout: React.FC = ({ children }) => {
         auth.signOut()
     }, [])
 
-    if (LAYOUT_BLACK_LIST.includes(route.split('/')[1])) return <>{children}</>
+    if (LAYOUT_BLACK_LIST.includes(asPath.split('/')[1])) return <>{children}</>
 
     return (
         <MyLayout >
             <AntdLayout.Sider collapsible collapsed={collapsed} onCollapse={onSider}>
-                <SiderHeader onClick={() => push('dashboard')} >
+                <SiderHeader onClick={() => push('/dashboard')} >
                     {collapsed && <Image src='/logo.png' width={32} height={32} />}
                     {!collapsed && <CollapsedTitle>쇼핑냥이 셀러스</CollapsedTitle>}
                 </SiderHeader>
-                <Menu theme="dark" selectedKeys={[route.split('/')[1]]} mode="inline">
+                <Menu theme="dark" selectedKeys={[asPath.split('/')[1]]} mode="inline">
                     {menuItems.map(({ icon, name, route }) =>
                         <Menu.Item
-                            onClick={() => push(route)}
+                            onClick={() => push('/' + route)}
                             key={route}
                             icon={icon}
                         >
@@ -118,7 +124,14 @@ const Layout: React.FC = ({ children }) => {
                 </Header>
                 <Content>
                     <MyBreadcrumb >
-                        {route.split('/').map(r => <Breadcrumb.Item key={r} >{routeToKorean(r)}</Breadcrumb.Item>)}
+                        {asPath.split('/').map((r, i) =>
+                            <Breadcrumb.Item
+                                onClick={() => push(asPath.split('/').slice(0, i + 1).join('/'))}
+                                key={r}
+                            >
+                                {routeToKorean(r)}
+                            </Breadcrumb.Item>
+                        )}
                     </MyBreadcrumb>
                     <ChildrenContainer  >
                         {children}

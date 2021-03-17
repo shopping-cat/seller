@@ -1,7 +1,7 @@
 import { Button, Checkbox, Form, Input } from 'antd'
 import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components'
-import { auth } from '../lib/firebase'
+import { auth } from '../../lib/firebase'
 
 const Container = styled.div`
     width: 100vw;
@@ -17,8 +17,8 @@ const FormContainer = styled(Form)`
 
 const login = () => {
 
-    const onFinish = useCallback((v) => {
-        auth.signInWithEmailAndPassword(v.email, v.password)
+    const onFinish = useCallback(async (v) => {
+        await auth.signInWithEmailAndPassword(v.email, v.password)
     }, [])
 
 
