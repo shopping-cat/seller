@@ -5,9 +5,6 @@ import Image from 'next/image'
 import {
     DesktopOutlined,
     PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined,
     ShopOutlined,
     MessageOutlined,
     ShoppingOutlined,
@@ -53,7 +50,7 @@ const MyBreadcrumb = styled(Breadcrumb)`
 `
 
 const ChildrenContainer = styled(Content)`
-    background-color: #fff;
+    /* background-color: #fff; */
 `
 
 const SiderHeader = styled.div`
