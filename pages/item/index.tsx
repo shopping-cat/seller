@@ -6,6 +6,8 @@ import moneyFormat from '../../lib/moneyFormat';
 import Link from 'next/link';
 import Highlighter from 'react-highlight-words';
 import Search from 'antd/lib/input/Search';
+import { LoadingOutlined } from '@ant-design/icons';
+import LoadingView from '../../components/View/LoadingView';
 
 
 
@@ -16,6 +18,8 @@ const item = () => {
 
 
     const searchedData = data?.items.filter(t => t.name.toLowerCase().includes(search.toLowerCase()))
+
+    if (loading) return <LoadingView />
 
     return (
         <div>

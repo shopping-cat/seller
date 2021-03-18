@@ -9,12 +9,13 @@ import {
     MessageOutlined,
     ShoppingOutlined,
     DollarCircleOutlined,
+    HomeOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useRouter } from 'next/dist/client/router';
-import routeToKorean from '../lib/routeToKorean';
 import { auth } from '../lib/firebase';
 import { LAYOUT_BLACK_LIST } from '../constants/value'
+import pathToKorean from '../lib/pathToKorean';
 
 
 const { SubMenu } = Menu
@@ -94,7 +95,7 @@ const Layout: React.FC = ({ children }) => {
     if (LAYOUT_BLACK_LIST.includes(asPath.split('/')[1])) return <>{children}</>
 
     return (
-        <MyLayout >
+        <MyLayout>
             <AntdLayout.Sider collapsible collapsed={collapsed} onCollapse={onSider}>
                 <SiderHeader onClick={() => push('/dashboard')} >
                     {collapsed && <Image src='/logo.png' width={32} height={32} />}
@@ -121,12 +122,12 @@ const Layout: React.FC = ({ children }) => {
                 </Header>
                 <Content>
                     <MyBreadcrumb >
-                        {asPath.split('/').map((r, i) =>
-                            <Breadcrumb.Item
-                                onClick={() => push(asPath.split('/').slice(0, i + 1).join('/'))}
-                                key={r}
-                            >
-                                {routeToKorean(r)}
+                        <Breadcrumb.Item >
+                            <Link href='/' ><a><HomeOutlined /></a></Link>
+                        </Breadcrumb.Item>
+                        {pathToKorean(asPath).map(({ name, path }) =>
+                            <Breadcrumb.Item key={name}>
+                                <Link href={path} ><a>{name}</a></Link>
                             </Breadcrumb.Item>
                         )}
                     </MyBreadcrumb>
