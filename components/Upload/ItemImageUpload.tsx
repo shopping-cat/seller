@@ -52,7 +52,6 @@ const ItemImageUpload: React.FC<ItemImageUploadProps> = ({ onChange }) => {
         for (const file of target.files) {
             try {
                 const { data } = await createItemImage({ variables: { image: file } })
-                console.log(data.createItemImage.uri) // 정상적으로 업로드 됨
                 setImages(images => [...images, data.createItemImage])
             } catch (error) {
                 console.log(error)

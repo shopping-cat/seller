@@ -17,3 +17,21 @@ export type OrderState = // 각각 아이템에 해당됨
 export type Category = string | null
 export type ItemState = 'sale' | 'stop' | 'noStock'
 export type RecommendState = 'none' | 'liked' | 'unliked'
+
+export type ItemOption = {
+    data: {
+        optionGroupName: string
+        optionDetails: {
+            name: string
+            price: number
+        }[]
+    }[]
+} | null
+
+
+export type ItemRequireInformation = {
+    data: {
+        title: string
+        content: string
+    }[]
+} | null

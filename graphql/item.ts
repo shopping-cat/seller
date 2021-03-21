@@ -1,5 +1,5 @@
 import { gql, MutationHookOptions, QueryHookOptions, useApolloClient } from "@apollo/client";
-import { ItemState } from "../constants/type";
+import { ItemState, ItemRequireInformation, ItemOption } from "../constants/type";
 import { createMutationHook, createQueryHook } from "../lib/createApolloHook";
 
 // QUERY/ITEM
@@ -65,5 +65,37 @@ interface ItemsVars {
 
 }
 export const useItems = (options?: QueryHookOptions<ItemsData, ItemsVars>) => createQueryHook<ItemsData, ItemsVars>(ITEMS, {
+    ...options,
+})
+
+// QUERY/CREATE_ITEM
+export const CREATE_ITEM = gql`
+  mutation ($input:CreateItemInput!) {
+    createItem(createItemInput: $input) {
+        id
+    }
+  }
+`
+
+interface ItemsData {
+    createItem: {
+        id: number
+    }
+}
+interface ItemsVars {
+    input: {
+        name: string
+        category1: string | null
+        category2: string | null
+        price: number
+        deliveryPrice: number
+        extraDeliveryPrice: number
+        option: ItemOption
+        requireInformation: ItemRequireInformation
+        images: number[]
+        html: string
+    }
+}
+export const useCreateItem = (options?: MutationHookOptions<ItemsData, ItemsVars>) => createMutationHook<ItemsData, ItemsVars>(CREATE_ITEM, {
     ...options,
 })

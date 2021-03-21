@@ -6,6 +6,7 @@ import { CATEGORY } from '../../constants/value'
 import ItemImageUpload from '../../components/Upload/ItemImageUpload'
 import { CreateItemImage } from '../../graphql/itemImage'
 import renderHTML from 'react-render-html';
+import { useCreateItem } from '../../graphql/item'
 
 
 const Contianer = styled.div`
@@ -44,8 +45,26 @@ const add = () => {
     const [images, setImages] = useState<CreateItemImage[]>([])
     const [html, setHtml] = useState('')
 
-    const onFinish = useCallback((v) => {
-        console.log(v)
+    const [createItem, { loading }] = useCreateItem()
+
+    const onFinish = useCallback(async (v) => {
+
+        const category1 = v.category[0] !== '기타' ? v.category[0] : null
+        const category2 = v.category.length > 1 ? v.category[1] !== '기타' ? v.category[1] : null : null
+
+        const input = {
+            name: v.name,
+            category1,
+            category2,
+            price: v.price,
+            deliveryPrice: v.deliveryPrice,
+            extraDeliveryPrice: v.extraDeliveryPrice,
+            option: { data: v.option },
+            requireInformation: { data: v.requireInformation },
+            images: images.map(v => v.id),
+            html: v.html
+        }
+        await createItem({ variables: { input } })
     }, [images])
 
     const onError = useCallback((e) => {
@@ -337,7 +356,7 @@ const add = () => {
                         },
                     ]}
                 >
-                    <ItemImageUpload />
+                    <ItemImageUpload onChange={v => setImages(v)} />
                 </Form.Item>
 
 
@@ -356,7 +375,7 @@ const add = () => {
                 </Form.Item>
 
                 <Form.Item label=' ' >
-                    <Button type="primary" htmlType="submit">제출</Button>
+                    <Button loading={loading} type="primary" htmlType="submit">제출</Button>
                 </Form.Item>
 
 
