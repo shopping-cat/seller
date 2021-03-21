@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Space, Table } from 'antd';
+import { Button, Space, Table } from 'antd';
 import { useItems } from '../../graphql/item';
 import moneyFormat from '../../lib/moneyFormat';
 import Link from 'next/link';
@@ -17,17 +17,21 @@ const item = () => {
     const [search, setSearch] = useState('')
 
 
-    const searchedData = data?.items.filter(t => t.name.toLowerCase().includes(search.toLowerCase()))
+    const searchedData = data?.items.filter(t => t.name.toLowerCase().includes(search.toLowerCase())).map(v => ({ ...v, key: v.id }))
 
     if (loading) return <LoadingView />
 
     return (
         <div>
-            <Search
-                placeholder='상품명으로 검색하기'
-                onChange={t => setSearch(t.target.value)}
-                style={{ width: 300, marginBottom: 16 }}
-            />
+            <Space direction='horizontal' style={{ marginBottom: 16 }}  >
+                <Search
+                    placeholder='상품명으로 검색하기'
+                    onChange={t => setSearch(t.target.value)}
+                    style={{ width: 300 }}
+                />
+
+                <Link href='/item/add' ><Button type='primary' >상품추가</Button></Link>
+            </Space>
 
             <Table
                 columns={[

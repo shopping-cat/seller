@@ -20,8 +20,9 @@ const dict = {
         name: '상품관리',
         default: {
             name: '상품세부',
-            'modify': { name: '수정' }
-        }
+            'modify': { name: '수정' },
+        },
+        'add': { name: '상품추가' }
     },
     'profit': {
         name: '수익관리'
@@ -46,7 +47,7 @@ const pathToKorean = (path: string) => {
         } catch (error) {
             name = '오류'
         }
-        console.log(splitedPath.slice(0, i + 1).join('/'))
+        // console.log(splitedPath.slice(0, i + 1).join('/'))
         result.push({
             name: name,
             path: '/' + splitedPath.slice(0, i + 1).join('/')
