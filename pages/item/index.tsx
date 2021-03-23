@@ -13,7 +13,10 @@ import LoadingView from '../../components/View/LoadingView';
 
 const item = () => {
 
-    const { data, loading, refetch } = useItems({ notifyOnNetworkStatusChange: true })
+    const { data, loading, refetch } = useItems({
+        notifyOnNetworkStatusChange: true,
+        fetchPolicy: 'network-only'
+    })
     const [search, setSearch] = useState('')
 
 

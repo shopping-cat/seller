@@ -8,12 +8,50 @@ export const ITEM = gql`
     item(id:$id) {
         id
         name
+        likeNum
+        state
+        deliveryPrice
+        extraDeliveryPrice
+        sale
+        price
+        salePrice
+        option
+        requireInformation
+        html
+        category1
+        category2
+        rate
+        totalOrderNum
+        reviewNum
+        images {
+            id
+            uri
+        }
     }
   }
 `
 export interface ItemDetail {
     id: number
     name: string
+    likeNum: number
+    state: ItemState
+    deliveryPrice: number
+    extraDeliveryPrice: number
+    price: number
+    sale: number
+    salePrice: number
+    option: ItemOption
+    requireInformation: ItemRequireInformation
+    html: string
+    category1: string | null
+    category2: string | null
+    rate: number
+    totalOrderNum: number
+    reviewNum: number
+    images: {
+        id: number
+        uri: string
+    }[]
 }
 interface ItemData {
     item: ItemDetail
