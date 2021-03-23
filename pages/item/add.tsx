@@ -7,6 +7,7 @@ import ItemImageUpload from '../../components/Upload/ItemImageUpload'
 import { CreateItemImage } from '../../graphql/itemImage'
 import renderHTML from 'react-render-html';
 import { useCreateItem } from '../../graphql/item'
+import { useRouter } from 'next/dist/client/router'
 
 
 const Contianer = styled.div`
@@ -42,6 +43,8 @@ const generateHtml = (content: string) => `
 
 const add = () => {
 
+    const { replace } = useRouter()
+
     const [images, setImages] = useState<CreateItemImage[]>([])
     const [html, setHtml] = useState('')
 
@@ -59,12 +62,14 @@ const add = () => {
             price: v.price,
             deliveryPrice: v.deliveryPrice,
             extraDeliveryPrice: v.extraDeliveryPrice,
-            option: { data: v.option },
+            option: v.option ? { data: v.option } : null,
             requireInformation: { data: v.requireInformation },
-            images: images.map(v => v.id),
+            images: v.images.map((v: any) => v.id),
             html: v.html
         }
-        await createItem({ variables: { input } })
+        const { data } = await createItem({ variables: { input } })
+        if (!!data) replace('/item')
+
     }, [images])
 
     const onError = useCallback((e) => {
@@ -154,13 +159,12 @@ const add = () => {
                                         >
                                             <Input placeholder="옵션 이름 예) 색상" style={{ width: 300 }} />
                                         </Form.Item>
-                                        {fields.length > 1 ? (
-                                            <MinusCircleOutlined
-                                                className="dynamic-delete-button"
-                                                onClick={() => remove(field.name)}
-                                                style={{ marginLeft: 16 }}
-                                            />
-                                        ) : null}
+
+                                        <MinusCircleOutlined
+                                            className="dynamic-delete-button"
+                                            onClick={() => remove(field.name)}
+                                            style={{ marginLeft: 16 }}
+                                        />
                                     </Space>
                                     <Form.Item  >
                                         <Form.List
@@ -223,7 +227,7 @@ const add = () => {
                                                             ) : null}
                                                         </Form.Item>
                                                     ))}
-                                                    <Form.Item label=' ' >
+                                                    {fields2.length < 10 && <Form.Item label=' ' >
                                                         <Button
                                                             type='ghost'
                                                             onClick={() => add2()}
@@ -232,14 +236,14 @@ const add = () => {
                                                             옵션 세부 추가
                                                         </Button>
                                                         <Form.ErrorList errors={errors2} />
-                                                    </Form.Item>
+                                                    </Form.Item>}
                                                 </>
                                             )}
                                         </Form.List>
                                     </Form.Item>
                                 </Form.Item>
                             ))}
-                            <Form.Item label=' ' >
+                            {fields.length < 5 && <Form.Item label=' ' >
                                 <Button
                                     type="dashed"
                                     onClick={() => add()}
@@ -248,7 +252,7 @@ const add = () => {
                                     상품 옵션 추가
                                 </Button>
                                 <Form.ErrorList errors={errors} />
-                            </Form.Item>
+                            </Form.Item>}
                         </>
                     )}
                 </Form.List>
@@ -330,7 +334,7 @@ const add = () => {
                                     ) : null}
                                 </Form.Item>
                             ))}
-                            <Form.Item label=' ' >
+                            {fields.length < 50 && <Form.Item label=' ' >
                                 <Button
                                     type="dashed"
                                     onClick={() => add()}
@@ -339,7 +343,7 @@ const add = () => {
                                     필수 표기 정보 추가
                                 </Button>
                                 <Form.ErrorList errors={errors} />
-                            </Form.Item>
+                            </Form.Item>}
                         </>
                     )}
                 </Form.List>

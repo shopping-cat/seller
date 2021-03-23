@@ -13,7 +13,7 @@ import LoadingView from '../../components/View/LoadingView';
 
 const item = () => {
 
-    const { data, loading } = useItems()
+    const { data, loading, refetch } = useItems({ notifyOnNetworkStatusChange: true })
     const [search, setSearch] = useState('')
 
 
@@ -30,6 +30,7 @@ const item = () => {
                     style={{ width: 300 }}
                 />
 
+                <Button onClick={() => refetch()} >새로고침</Button>
                 <Link href='/item/add' ><Button type='primary' >상품추가</Button></Link>
             </Space>
 
