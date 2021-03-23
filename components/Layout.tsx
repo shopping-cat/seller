@@ -10,6 +10,7 @@ import {
     ShoppingOutlined,
     DollarCircleOutlined,
     HomeOutlined,
+    ArrowLeftOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useRouter } from 'next/dist/client/router';
@@ -57,6 +58,7 @@ const ChildrenContainer = styled(Content)`
 const SiderHeader = styled.div`
     height: 64px;
     display: flex;
+    flex-direction:row;
     align-items: center;
     justify-content: center;
     &:hover {
@@ -67,6 +69,7 @@ const SiderHeader = styled.div`
 const CollapsedTitle = styled.a`
     font-size: 20px;
     color: #fff;
+    margin-left:8px;
 `
 
 const menuItems = [
@@ -80,7 +83,7 @@ const menuItems = [
 
 const Layout: React.FC = ({ children }) => {
 
-    const { asPath, push } = useRouter()
+    const { asPath, push, back } = useRouter()
 
     const [collapsed, setCollapsed] = useState(false)
 
@@ -97,9 +100,9 @@ const Layout: React.FC = ({ children }) => {
     return (
         <MyLayout>
             <AntdLayout.Sider collapsible collapsed={collapsed} onCollapse={onSider}>
-                <SiderHeader onClick={() => push('/dashboard')} >
-                    {collapsed && <Image src='/logo.png' width={32} height={32} />}
-                    {!collapsed && <CollapsedTitle>쇼핑냥이 셀러스</CollapsedTitle>}
+                <SiderHeader onClick={back} >
+                    <ArrowLeftOutlined style={{ fontSize: '16px', color: '#fff' }} />
+                    {!collapsed && <CollapsedTitle>뒤로가기</CollapsedTitle>}
                 </SiderHeader>
                 <Menu theme="dark" selectedKeys={[asPath.split('/')[1]]} mode="inline">
                     {menuItems.map(({ icon, name, route }) =>
@@ -116,7 +119,7 @@ const Layout: React.FC = ({ children }) => {
             <AntdLayout >
                 <Header>
                     <HeaderLeft>
-                        {collapsed && <Link href='/dashboard' ><UnCollapsedTitle >쇼핑냥이 셀러스</UnCollapsedTitle></Link>}
+                        <Link href='/dashboard' ><UnCollapsedTitle >쇼핑냥이 셀러스</UnCollapsedTitle></Link>
                     </HeaderLeft>
                     <Button type='primary' onClick={onLogout} >로그아웃</Button>
                 </Header>

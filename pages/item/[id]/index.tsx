@@ -16,6 +16,7 @@ const ContentContainer = styled.div`
 
 const HTMLContainer = styled.div`
     height: 80vh;
+    width: 360px;
     overflow:scroll;
     background-color:#fff;
 `
