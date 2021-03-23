@@ -28,7 +28,7 @@ const ModifyBtn = styled(Button)`
 
 const itemDetail = () => {
 
-    const { query } = useRouter()
+    const { query, asPath } = useRouter()
 
     const { data, loading, refetch } = useItem({
         variables: { id: Number(query.id) },
@@ -45,7 +45,7 @@ const itemDetail = () => {
         <Row gutter={[16, 1]}>
             <Col span={12} >
                 <ContentContainer>
-                    <Link href='modify' ><a><ModifyBtn type='primary' >수정</ModifyBtn></a></Link>
+                    <Link href={asPath + '/modify'} ><a><ModifyBtn type='primary' >수정</ModifyBtn></a></Link>
                     <h2>이미지</h2>
                     <Space wrap direction='horizontal' size={8} >
                         {data.item.images.map(v =>
@@ -54,7 +54,7 @@ const itemDetail = () => {
                                 src={v.uri}
                                 height={150}
                                 width={150}
-                                style={{ objectFit: 'contain' }}
+                                style={{ objectFit: 'cover' }}
                             />
                         )}
                     </Space>

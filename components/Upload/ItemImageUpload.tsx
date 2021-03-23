@@ -8,7 +8,7 @@ import arrayMove from 'array-move'
 const Img = styled.img`
     width: 100px;
     height: 100px;
-    object-fit:contain;
+    object-fit:cover;
     background-color:#fff;
     margin: 4px;
 `

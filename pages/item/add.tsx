@@ -17,9 +17,10 @@ const Contianer = styled.div`
 
 const HTMLContainer = styled.div`
     width: 360px;
-    min-height: 600px;
+    height: 720px;
     background-color: #fff;
     margin-left: 16px;
+    overflow:scroll;
 `
 
 const generateHtml = (content: string) => `
@@ -67,9 +68,11 @@ const add = () => {
             images: v.images.map((v: any) => v.id),
             html: v.html
         }
-        const { data } = await createItem({ variables: { input } })
-        if (!!data) replace('/item')
-
+        try {
+            const { data } = await createItem({ variables: { input } })
+            if (!!data) replace('/item')
+        } catch (error) {
+        }
     }, [images])
 
     const onError = useCallback((e) => {
