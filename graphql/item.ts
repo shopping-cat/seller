@@ -27,6 +27,24 @@ export const ITEM = gql`
             id
             uri
         }
+        updateItem {
+            id
+            name
+            deliveryPrice
+            extraDeliveryPrice
+            sale
+            price
+            salePrice
+            option
+            requireInformation
+            html
+            category1
+            category2
+            images {
+                id
+                uri
+            }
+        }
     }
   }
 `
@@ -52,6 +70,24 @@ export interface ItemDetail {
         id: number
         uri: string
     }[]
+    updateItem: {
+        id: number
+        name: string
+        deliveryPrice: number
+        extraDeliveryPrice: number
+        sale: number
+        price: number
+        salePrice: number
+        option: ItemOption
+        requireInformation: ItemRequireInformation
+        html: string
+        category1: string | null
+        category2: string | null
+        images: {
+            id: number
+            uri: string
+        }[]
+    }
 }
 interface ItemData {
     item: ItemDetail
@@ -115,12 +151,12 @@ export const CREATE_ITEM = gql`
   }
 `
 
-interface ItemsData {
+interface CreateItemData {
     createItem: {
         id: number
     }
 }
-interface ItemsVars {
+interface CreateItemVars {
     input: {
         name: string
         category1: string | null
@@ -134,6 +170,56 @@ interface ItemsVars {
         html: string
     }
 }
-export const useCreateItem = (options?: MutationHookOptions<ItemsData, ItemsVars>) => createMutationHook<ItemsData, ItemsVars>(CREATE_ITEM, {
+export const useCreateItem = (options?: MutationHookOptions<CreateItemData, CreateItemVars>) => createMutationHook<CreateItemData, CreateItemVars>(CREATE_ITEM, {
+    ...options,
+})
+
+
+// QUERY/UPDATE_ITEM
+export const UPDATE_ITEM = gql`
+  mutation ($input:UpdateItemInput!) {
+    updateItem(updateItemInput: $input) {
+        id
+        name
+        state
+        category1
+        category2
+        sale
+        price
+        deliveryPrice
+        extraDeliveryPrice
+        option
+        requireInformation
+        images {
+            id
+            uri
+        }
+        html
+    }
+  }
+`
+
+interface UpdateItemData {
+    updateItem: {
+        id: number
+    }
+}
+interface UpdateItemVars {
+    input: {
+        id: number
+        name: string
+        category1: string | null
+        category2: string | null
+        price: number
+        sale: number
+        deliveryPrice: number
+        extraDeliveryPrice: number
+        option: ItemOption
+        requireInformation: ItemRequireInformation
+        images: number[]
+        html: string
+    }
+}
+export const useUpdateItem = (options?: MutationHookOptions<UpdateItemData, UpdateItemVars>) => createMutationHook<UpdateItemData, UpdateItemVars>(UPDATE_ITEM, {
     ...options,
 })

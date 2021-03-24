@@ -31,13 +31,14 @@ const ImgContainer = styled.div`
 
 interface ItemImageUploadProps {
     onChange?: (urls: CreateItemImage[]) => void
+    value?: CreateItemImage[]
 }
 
-const ItemImageUpload: React.FC<ItemImageUploadProps> = ({ onChange }) => {
+const ItemImageUpload: React.FC<ItemImageUploadProps> = ({ onChange, value }) => {
 
     const ref = useRef<HTMLInputElement>(null)
 
-    const [images, setImages] = useState<CreateItemImage[]>([])
+    const [images, setImages] = useState<CreateItemImage[]>(value || [])
     const [createItemImage, { loading }] = useCreateItemImage()
 
     useEffect(() => {

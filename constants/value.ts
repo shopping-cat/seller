@@ -3,7 +3,7 @@ export const LAYOUT_BLACK_LIST = ['login']
 export const CATEGORY = [
     {
         category: '사료',
-        detailCategory: ['건식사료', '주식캔', '츄르', '기타']
+        detailCategory: ['건식사료', '주식캔', '츄르']
     },
     {
         category: '간식',
@@ -16,9 +16,5 @@ export const CATEGORY = [
     {
         category: '용품',
         detailCategory: ['울타리', '칫솔/치약', '화장실', '스크래쳐', '정수기', '모래', '미용']
-    },
-    {
-        category: '기타',
-        detailCategory: null
     }
 ]

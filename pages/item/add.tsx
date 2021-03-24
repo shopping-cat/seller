@@ -68,6 +68,7 @@ const add = () => {
             images: v.images.map((v: any) => v.id),
             html: v.html
         }
+        alert('영업일로부터 3일 이내에 검토후 게시됩니다.')
         try {
             const { data } = await createItem({ variables: { input } })
             if (!!data) replace('/item')
@@ -108,7 +109,7 @@ const add = () => {
                 >
                     <Cascader
                         placeholder='카테고리를 골라주세요'
-                        options={CATEGORY.map(c1 => ({ label: c1.category, value: c1.category, children: c1.detailCategory && c1.detailCategory.map(c2 => ({ label: c2, value: c2 })) }))}
+                        options={[...CATEGORY, null].map(c1 => ({ label: c1?.category || '기타', value: c1?.category || null, children: c1?.detailCategory && [...c1.detailCategory, null].map(c2 => ({ label: c2 || '기타', value: c2 })) }))}
                     />
                 </Form.Item>
                 <h1>가격</h1>
