@@ -1,10 +1,10 @@
 import { Button, Carousel, Col, Descriptions, Image, Row, Space } from 'antd'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import LoadingView from '../../../components/View/LoadingView'
-import { useItem } from '../../../graphql/item'
+import { useDeleteItemUpdate, useItem } from '../../../graphql/item'
 import generateHTML from '../../../lib/generateHTML'
 import moneyFormat from '../../../lib/moneyFormat'
 
@@ -27,6 +27,12 @@ const ModifyBtn = styled(Button)`
     right: 32px;
 `
 
+const ItemUpdateBtnContainer = styled.div`
+    position:absolute;
+    top: 40px;
+    right: 32px;
+`
+
 const itemDetail = () => {
 
     const { query, asPath } = useRouter()
@@ -35,8 +41,14 @@ const itemDetail = () => {
         variables: { id: Number(query.id) },
         fetchPolicy: 'network-only'
     })
+    const [deleteItemUpdate, { loading: cancelLoading }] = useDeleteItemUpdate()
 
-
+    const onCancelItemUpdate = useCallback(async () => {
+        if (!data) return
+        if (!confirm('취소시 복구 할 수 없습니다.')) refetch
+        await deleteItemUpdate({ variables: { id: data.item.id } })
+        refetch()
+    }, [data])
 
 
     if (loading) return <LoadingView />
@@ -48,7 +60,10 @@ const itemDetail = () => {
                 <Col span={12} >
                     <h1>업데이트 요청한 상품 데이터</h1>
                     <ContentContainer>
-                        <Link href={asPath + '/modify'} ><a><ModifyBtn type='primary' >수정</ModifyBtn></a></Link>
+                        <ItemUpdateBtnContainer  >
+                            <Button style={{ marginRight: 16 }} loading={cancelLoading} type='dashed' onClick={onCancelItemUpdate} >업데이트 요청 취소</Button>
+                            <Link href={asPath + '/modify'} ><a><Button type='primary' >수정</Button></a></Link>
+                        </ItemUpdateBtnContainer>
                         <h2>이미지</h2>
                         <Space wrap direction='horizontal' size={8} >
                             {data.item.updateItem.images.map(v =>

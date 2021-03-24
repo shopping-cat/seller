@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 
 import { Button, Select, Space, Table } from 'antd';
-import { useItems, useUpdateItemState } from '../../graphql/item';
+import { useItems, useUpdateItemState, useDeleteItem } from '../../graphql/item';
 import moneyFormat from '../../lib/moneyFormat';
 import Link from 'next/link';
 import Highlighter from 'react-highlight-words';
@@ -21,6 +21,7 @@ const item = () => {
     const { data, loading, refetch } = useItems({ fetchPolicy: 'network-only' })
     const { refreshing, onRefresh } = useRefreshing(refetch)
     const [updateItemState, { loading: updateItemStateLoading }] = useUpdateItemState()
+    const [deleteItem] = useDeleteItem()
 
     const onChangeState = useCallback(async (id: number, value: string) => {
         await updateItemState({
@@ -30,6 +31,13 @@ const item = () => {
             }
         })
     }, [])
+
+    const onDelete = useCallback(async (id: number) => {
+        if (confirm('삭제후에는 복구할 수 없습니다.')) {
+            await deleteItem({ variables: { id } })
+            onRefresh()
+        }
+    }, [onRefresh])
 
 
     const searchedData = data?.items.filter(t => t.name.toLowerCase().includes(search.toLowerCase())).map(v => ({ ...v, key: v.id }))
@@ -153,7 +161,8 @@ const item = () => {
                         title: '액션',
                         dataIndex: 'id',
                         align: 'center',
-                        render: t => <Space size={16} >
+                        render: (t, r) => <Space size={16} >
+                            {r.state === '상품등록요청' && <a onClick={() => onDelete(r.id)} >삭제</a>}
                             <Link href={`/item/${t}`} ><a>자세히</a></Link>
                             <Link href={`/item/${t}/modify`} ><a>수정</a></Link>
                         </Space>

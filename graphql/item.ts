@@ -253,3 +253,45 @@ interface UpdateItemStateVars {
 export const useUpdateItemState = (options?: MutationHookOptions<UpdateItemStateData, UpdateItemStateVars>) => createMutationHook<UpdateItemStateData, UpdateItemStateVars>(UPDATE_ITEM_STATE, {
     ...options,
 })
+
+// QUERY/DELETE_ITEM
+export const DELETE_ITEM = gql`
+  mutation ($id: Int!) {
+    deleteItem(id:$id) {
+        id
+    }
+  }
+`
+
+interface DeleteItemData {
+    deleteItem: {
+        id: number
+    }
+}
+interface DeleteItemVars {
+    id: number
+}
+export const useDeleteItem = (options?: MutationHookOptions<DeleteItemData, DeleteItemVars>) => createMutationHook<DeleteItemData, DeleteItemVars>(DELETE_ITEM, {
+    ...options,
+})
+
+// QUERY/DELETE_ITEM_UPDATe
+export const DELETE_ITEM_UPDATe = gql`
+  mutation ($id: Int!) {
+    deleteItemUpdate(id:$id) {
+        id
+    }
+  }
+`
+
+interface DeleteItemUpdateData {
+    deleteItemUpdate: {
+        id: number
+    }
+}
+interface DeleteItemUpdateVars {
+    id: number
+}
+export const useDeleteItemUpdate = (options?: MutationHookOptions<DeleteItemUpdateData, DeleteItemUpdateVars>) => createMutationHook<DeleteItemUpdateData, DeleteItemUpdateVars>(DELETE_ITEM_UPDATe, {
+    ...options,
+})
