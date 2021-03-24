@@ -1,28 +1,40 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
-import { Button, Space, Table } from 'antd';
-import { useItems } from '../../graphql/item';
+import { Button, Select, Space, Table } from 'antd';
+import { useItems, useUpdateItemState } from '../../graphql/item';
 import moneyFormat from '../../lib/moneyFormat';
 import Link from 'next/link';
 import Highlighter from 'react-highlight-words';
 import Search from 'antd/lib/input/Search';
 import { LoadingOutlined } from '@ant-design/icons';
 import LoadingView from '../../components/View/LoadingView';
+import useRefreshing from '../../hooks/useRefreshing';
+
+const { Option } = Select
 
 
 
 const item = () => {
 
-    const { data, loading, refetch } = useItems({
-        notifyOnNetworkStatusChange: true,
-        fetchPolicy: 'network-only'
-    })
     const [search, setSearch] = useState('')
+
+    const { data, loading, refetch } = useItems({ fetchPolicy: 'network-only' })
+    const { refreshing, onRefresh } = useRefreshing(refetch)
+    const [updateItemState, { loading: updateItemStateLoading }] = useUpdateItemState()
+
+    const onChangeState = useCallback(async (id: number, value: string) => {
+        await updateItemState({
+            variables: {
+                id,
+                state: value
+            }
+        })
+    }, [])
 
 
     const searchedData = data?.items.filter(t => t.name.toLowerCase().includes(search.toLowerCase())).map(v => ({ ...v, key: v.id }))
 
-    if (loading) return <LoadingView />
+    if (loading || refreshing) return <LoadingView />
 
     return (
         <div>
@@ -33,7 +45,7 @@ const item = () => {
                     style={{ width: 300 }}
                 />
 
-                <Button onClick={() => refetch()} >새로고침</Button>
+                <Button onClick={onRefresh} >새로고침</Button>
                 <Link href='/item/add' ><Button type='primary' >상품추가</Button></Link>
             </Space>
 
@@ -44,11 +56,11 @@ const item = () => {
                         dataIndex: 'name',
                         fixed: 'left',
                         align: 'center',
-                        render: t => <Highlighter
+                        render: (t, record) => <Highlighter
                             highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
                             searchWords={[search]}
                             autoEscape
-                            textToHighlight={t ? t.toString() : ''}
+                            textToHighlight={t ? t.toString() + (record.updateItem ? `(수정요청)` : '') : ''}
                         />
                     },
                     {
@@ -91,11 +103,25 @@ const item = () => {
                                 text: '상품등록요청',
                                 value: '상품등록요청'
                             },
-                            {
-                                text: '상품수정요청',
-                                value: '상품수정요청'
-                            }
                         ],
+                        render: (t, record) =>
+                            <>
+                                {t === '상품등록요청'
+                                    ?
+                                    <div>{t}</div>
+                                    :
+                                    <Select
+                                        onChange={(v) => onChangeState(record.id, v)}
+                                        loading={updateItemStateLoading}
+                                        value={t}
+                                    >
+                                        <Option value='판매중'>판매중</Option>
+                                        <Option value='판매중지'>판매중지</Option>
+                                        <Option value='재고없음'>재고없음</Option>
+                                    </Select>
+                                }
+                            </>
+                        ,
                         onFilter: (value, record) => record.state.indexOf(value as string) === 0,
                         align: 'center'
                     },

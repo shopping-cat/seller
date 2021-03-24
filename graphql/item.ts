@@ -87,7 +87,7 @@ export interface ItemDetail {
             id: number
             uri: string
         }[]
-    }
+    } | null
 }
 interface ItemData {
     item: ItemDetail
@@ -115,6 +115,9 @@ export const ITEMS = gql`
         rate
         reviewNum
         totalOrderNum
+        updateItem {
+            id
+        }
     }
   }
 `
@@ -131,6 +134,9 @@ export interface Item {
     rate: number
     reviewNum: number
     totalOrderNum: number
+    updateItem: {
+        id: number
+    } | null
 }
 interface ItemsData {
     items: Item[]
@@ -221,5 +227,29 @@ interface UpdateItemVars {
     }
 }
 export const useUpdateItem = (options?: MutationHookOptions<UpdateItemData, UpdateItemVars>) => createMutationHook<UpdateItemData, UpdateItemVars>(UPDATE_ITEM, {
+    ...options,
+})
+
+// QUERY/UPDATE_ITEM_STATE
+export const UPDATE_ITEM_STATE = gql`
+  mutation ($id: Int!, $state: String!) {
+    updateItemState(id:$id, state:$state) {
+        id
+        state
+    }
+  }
+`
+
+interface UpdateItemStateData {
+    updateItemState: {
+        id: number
+        state: ItemState
+    }
+}
+interface UpdateItemStateVars {
+    id: number
+    state: string
+}
+export const useUpdateItemState = (options?: MutationHookOptions<UpdateItemStateData, UpdateItemStateVars>) => createMutationHook<UpdateItemStateData, UpdateItemStateVars>(UPDATE_ITEM_STATE, {
     ...options,
 })
