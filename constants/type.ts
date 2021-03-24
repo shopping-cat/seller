@@ -15,8 +15,14 @@ export type OrderState = // 각각 아이템에 해당됨
     '환불중' | '환불처리' | // 환불 
     '교환중' | '교환처리' // 교환
 export type Category = string | null
-export type ItemState = 'sale' | 'stop' | 'noStock'
 export type RecommendState = 'none' | 'liked' | 'unliked'
+
+export type ItemState =
+    '판매중' |
+    '판매중지' |
+    '재고없음' |
+    '상품등록요청' |
+    '상품수정요청'
 
 export type ItemOption = {
     data: {

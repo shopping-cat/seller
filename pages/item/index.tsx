@@ -74,19 +74,26 @@ const item = () => {
                     {
                         title: '상태',
                         dataIndex: 'state',
-                        render: t => <div>{t === 'sale' ? '판매중' : t === 'stop' ? '판매중지' : '재고없음'}</div>,
                         filters: [
                             {
                                 text: '판매중',
-                                value: 'sale',
+                                value: '판매중'
                             },
                             {
                                 text: '판매중지',
-                                value: 'stop',
+                                value: '판매중지'
                             },
                             {
                                 text: '재고없음',
-                                value: 'noStock'
+                                value: '재고없음'
+                            },
+                            {
+                                text: '상품등록요청',
+                                value: '상품등록요청'
+                            },
+                            {
+                                text: '상품수정요청',
+                                value: '상품수정요청'
                             }
                         ],
                         onFilter: (value, record) => record.state.indexOf(value as string) === 0,
