@@ -163,7 +163,7 @@ const item = () => {
                         align: 'center',
                         render: (t, r) => <Space size={16} >
                             <Link href={`/item/${t}`} ><a>자세히</a></Link>
-                            <Link href={`/item/${t}/modify`} ><a>수정</a></Link>
+                            <Link href={`/item/${t}/edit`} ><a>수정</a></Link>
                             {r.state === '상품등록요청' && <a onClick={() => onDelete(r.id)} >삭제</a>}
                             {r.state !== '상품등록요청' && <Link href={`/item/${t}/review`} ><a>리뷰</a></Link>}
                         </Space>

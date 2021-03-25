@@ -21,7 +21,7 @@ const HTMLContainer = styled.div`
     background-color:#fff;
 `
 
-const ModifyBtn = styled(Button)`
+const EditBtn = styled(Button)`
     position:absolute;
     top: 16px;
     right: 32px;
@@ -62,7 +62,7 @@ const itemDetail = () => {
                     <ContentContainer>
                         <ItemUpdateBtnContainer  >
                             <Button style={{ marginRight: 16 }} loading={cancelLoading} type='dashed' onClick={onCancelItemUpdate} >업데이트 요청 취소</Button>
-                            <Link href={asPath + '/modify'} ><a><Button type='primary' >수정</Button></a></Link>
+                            <Link href={asPath + '/edit'} ><a><Button type='primary' >수정</Button></a></Link>
                         </ItemUpdateBtnContainer>
                         <h2>이미지</h2>
                         <Space wrap direction='horizontal' size={8} >
@@ -125,7 +125,7 @@ const itemDetail = () => {
             <Col span={12} >
                 {data.item.updateItem && <h1>현재 게시중인 상품내용</h1>}
                 <ContentContainer>
-                    {!data.item.updateItem && <Link href={asPath + '/modify'} ><a><ModifyBtn type='primary' >수정</ModifyBtn></a></Link>}
+                    {!data.item.updateItem && <Link href={asPath + '/edit'} ><a><EditBtn type='primary' >수정</EditBtn></a></Link>}
                     <h2>이미지</h2>
                     <Space wrap direction='horizontal' size={8} >
                         {data.item.images.map(v =>

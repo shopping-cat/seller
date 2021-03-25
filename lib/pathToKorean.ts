@@ -14,13 +14,14 @@ const dict = {
         name: '문의관리'
     },
     'shop': {
-        name: '상점관리'
+        name: '상점관리',
+        'edit': { name: '수정' }
     },
     'item': {
         name: '상품관리',
         default: {
             name: '상품세부',
-            'modify': { name: '수정' },
+            'edit': { name: '수정' },
             'review': { name: '리뷰' }
         },
         'add': { name: '상품추가' }

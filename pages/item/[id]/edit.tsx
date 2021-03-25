@@ -26,7 +26,7 @@ const HTMLContainer = styled.div`
 `
 
 
-const modify = () => {
+const edit = () => {
 
     const { replace, query } = useRouter()
 
@@ -395,4 +395,4 @@ const modify = () => {
     )
 }
 
-export default modify
+export default edit
