@@ -145,7 +145,7 @@ const itemDetail = () => {
 
                         <Descriptions.Item label='구매확정 수' >{moneyFormat(data.item.totalOrderNum)}</Descriptions.Item>
                         <Descriptions.Item label='좋아요 수' >{moneyFormat(data.item.likeNum)}</Descriptions.Item>
-                        <Descriptions.Item label='리뷰 수' ><Link href='review' ><a>{moneyFormat(data.item.reviewNum)}</a></Link></Descriptions.Item>
+                        <Descriptions.Item label='리뷰 수' ><Link href={asPath + '/review'} ><a>{moneyFormat(data.item.reviewNum)}</a></Link></Descriptions.Item>
 
                         <Descriptions.Item span={1.5} label='카테고리2' >{data.item.category1 || '기타'}</Descriptions.Item>
                         <Descriptions.Item span={1.5} label='카테고리1' >{data.item.category2 || '기타'}</Descriptions.Item>

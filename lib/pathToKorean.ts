@@ -21,6 +21,7 @@ const dict = {
         default: {
             name: '상품세부',
             'modify': { name: '수정' },
+            'review': { name: '리뷰' }
         },
         'add': { name: '상품추가' }
     },
