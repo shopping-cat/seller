@@ -4,11 +4,17 @@ const dict = {
     },
     'order': {
         name: '주문관리',
+        // 정상 프로세스
         'new': { name: '신규주문' },
         'onDelivery': { name: '배송중' },
-        'deliveryComplete': { name: '배송완료' },
-        'exchange': { name: '교환' },
-        'refund': { name: '환불' }
+        'completedDelivery': { name: '배송완료' },
+        'confirmed': { name: '구매확정' },
+        // 클레임
+        'exchangeRequest': { name: '교환' },
+        'refundRequest': { name: '환불' },
+        'exchanged': { name: '교환처리' },
+        'refunded': { name: '환불처리' }
+
     },
     'inquery': {
         name: '문의관리'

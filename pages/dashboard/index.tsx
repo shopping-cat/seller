@@ -60,25 +60,25 @@ const dashboard = () => {
 
     return (
         <Container >
-            <RowContainer style={{ flexGrow: 1 }} >
+            <RowContainer>
                 <Row gutter={[16, 16]} >
                     <Col span={6} >
                         <Card title='주문' extra={<Link href='/order' ><a><ArrowRightOutlined /></a></Link>} >
                             <LabelText onPress={() => push('/order/new')} label='신규주문' >{1}</LabelText>
-                            <LabelText onPress={() => push('/order/deliveryReady')} label='배송준비' >{1}</LabelText>
+                            {/* <LabelText onPress={() => push('/order/deliveryReady')} label='배송준비' >{1}</LabelText> */}
 
                         </Card>
                     </Col>
                     <Col span={6} >
                         <Card title='배송' extra={<Link href='/order' ><a><ArrowRightOutlined /></a></Link>} >
                             <LabelText onPress={() => push('/order/onDelivery')} label='배송중' >{1}</LabelText>
-                            <LabelText onPress={() => push('/order/deliveryComplete')} label='배송완료' >{1}</LabelText>
+                            <LabelText onPress={() => push('/order/completedDelivery')} label='배송완료' >{1}</LabelText>
                         </Card>
                     </Col>
                     <Col span={6} >
                         <Card title='클레임' extra={<Link href='/order' ><a><ArrowRightOutlined /></a></Link>} >
-                            <LabelText onPress={() => push('/order/exchange')} label='교환요청' >{1}</LabelText>
-                            <LabelText onPress={() => push('/order/refund')} label='환불요청' >{1}</LabelText>
+                            <LabelText onPress={() => push('/order/exchangeRequest')} label='교환요청' >{1}</LabelText>
+                            <LabelText onPress={() => push('/order/refundRequest')} label='환불요청' >{1}</LabelText>
                         </Card>
                     </Col>
                     <Col span={6} >
