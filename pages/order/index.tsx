@@ -42,7 +42,7 @@ const order = () => {
                 <Card headStyle={{ color: !!data.shop.refundRequestOrderNum && 'red' }} title={`환불요청 (${data.shop.refundRequestOrderNum})`} extra={<Link href='/order/refundRequest' ><a><ArrowRightOutlined /></a></Link>} >
                     <List
                         dataSource={data.refundRequestOrders}
-                        renderItem={item => (<List.Item>{item.item + ' ' + item.stringOptionNum}</List.Item>)}
+                        renderItem={item => (<List.Item>{item.item.name + ' ' + item.stringOptionNum}</List.Item>)}
                     />
                 </Card>
             </Col>
@@ -50,7 +50,7 @@ const order = () => {
                 <Card headStyle={{ color: !!data.shop.exchangeRequestOrderNum && 'red' }} title={`교환요청 (${data.shop.exchangeRequestOrderNum})`} extra={<Link href='/order/exchangeRequest' ><a><ArrowRightOutlined /></a></Link>} >
                     <List
                         dataSource={data.exchangeRequestOrders}
-                        renderItem={item => (<List.Item>{item.item + ' ' + item.stringOptionNum}</List.Item>)}
+                        renderItem={item => (<List.Item>{item.item.name + ' ' + item.stringOptionNum}</List.Item>)}
                     />
                 </Card>
             </Col>
@@ -58,7 +58,7 @@ const order = () => {
                 <Card title={`환불처리 (${data.shop.refundedOrderNum})`} extra={<Link href='/order/refunded' ><a><ArrowRightOutlined /></a></Link>} >
                     <List
                         dataSource={data.refundedOrders}
-                        renderItem={item => (<List.Item>{item.item + ' ' + item.stringOptionNum}</List.Item>)}
+                        renderItem={item => (<List.Item>{item.item.name + ' ' + item.stringOptionNum}</List.Item>)}
                     />
                 </Card>
             </Col>
@@ -66,7 +66,7 @@ const order = () => {
                 <Card title={`교환처리 (${data.shop.exchangedOrderNum})`} extra={<Link href='/order/exchanged' ><a><ArrowRightOutlined /></a></Link>} >
                     <List
                         dataSource={data.exchangedOrders}
-                        renderItem={item => (<List.Item>{item.item + ' ' + item.stringOptionNum}</List.Item>)}
+                        renderItem={item => (<List.Item>{item.item.name + ' ' + item.stringOptionNum}</List.Item>)}
                     />
                 </Card>
             </Col>
@@ -81,7 +81,7 @@ const order = () => {
                     <Card title={`신규주문 (${data.shop.newOrderNum})`} extra={<Link href='/order/new' ><a><ArrowRightOutlined /></a></Link>} >
                         <List
                             dataSource={data.newOrders}
-                            renderItem={item => (<List.Item>{item.item + ' ' + item.stringOptionNum}</List.Item>)}
+                            renderItem={item => (<List.Item>{item.item.name + ' ' + item.stringOptionNum}</List.Item>)}
                         />
                     </Card>
                 </Col>
@@ -89,7 +89,7 @@ const order = () => {
                     <Card title={`배송중 (${data.shop.onDeliveryOrderNum})`} extra={<Link href='/order/onDelivery' ><a><ArrowRightOutlined /></a></Link>} >
                         <List
                             dataSource={data.onDeliveryOrders}
-                            renderItem={item => (<List.Item>{item.item + ' ' + item.stringOptionNum}</List.Item>)}
+                            renderItem={item => (<List.Item>{item.item.name + ' ' + item.stringOptionNum}</List.Item>)}
                         />
                     </Card>
                 </Col>
@@ -97,7 +97,7 @@ const order = () => {
                     <Card title={`배송완료 (${data.shop.completedDeliveryOrderNum})`} extra={<Link href='/order/completedDelivery' ><a><ArrowRightOutlined /></a></Link>} >
                         <List
                             dataSource={data.completedDeliveryOrders}
-                            renderItem={item => (<List.Item>{item.item + ' ' + item.stringOptionNum}</List.Item>)}
+                            renderItem={item => (<List.Item>{item.item.name + ' ' + item.stringOptionNum}</List.Item>)}
                         />
                     </Card>
                 </Col>
@@ -105,7 +105,7 @@ const order = () => {
                     <Card title={`구매확정 (${data.shop.confirmedOrderNum})`} extra={<Link href='/order/confirmed' ><a><ArrowRightOutlined /></a></Link>} >
                         <List
                             dataSource={data.confirmedOrders}
-                            renderItem={item => (<List.Item>{item.item + ' ' + item.stringOptionNum}</List.Item>)}
+                            renderItem={item => (<List.Item>{item.item.name + ' ' + item.stringOptionNum}</List.Item>)}
                         />
                     </Card>
                 </Col>
