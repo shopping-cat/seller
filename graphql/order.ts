@@ -428,3 +428,292 @@ interface ConfirmedOrdersVars { }
 export const useConfirmedOrders = (options?: QueryHookOptions<ConfirmedOrdersData, ConfirmedOrdersVars>) => createQueryHook<ConfirmedOrdersData, ConfirmedOrdersVars>(CONFIRMED_ORDERS, {
     ...options,
 })
+
+
+// 환불 요청
+export const REFUND_REQUEST_ORDERS = gql`
+  query{
+    refundRequestOrders(limit:1000){
+        id
+        stringOptionNum
+        deliveryNumber
+        deliveryCompany
+        deliveryCompletionDate
+        reason
+        state
+        payment {
+            id
+            address
+            addressName
+            addressPhone
+            deliveryMemo
+            postCode
+        }
+        item {
+            id
+            name
+            mainImage
+        }
+        user {
+            id
+            name
+        }
+    }
+  }
+`
+
+export interface RefundRequestOrder {
+    id: number
+    stringOptionNum: string
+    deliveryNumber: string
+    deliveryCompany: string
+    deliveryCompletionDate: Date
+    reason: string
+    state: OrderState
+    payment: {
+        id: number
+        address: string
+        addressName: string
+        addressPhone: string
+        deliveryMemo: string
+        postCode: string
+    }
+    item: {
+        id: number
+        name: string
+        mainImage: string
+    }
+    user: {
+        id: string
+        name: string
+    }
+}
+
+interface RefundRequestOrdersData { refundRequestOrders: RefundRequestOrder[] }
+interface RefundRequestOrdersVars { }
+export const useRefundRequestOrders = (options?: QueryHookOptions<RefundRequestOrdersData, RefundRequestOrdersVars>) => createQueryHook<RefundRequestOrdersData, RefundRequestOrdersVars>(REFUND_REQUEST_ORDERS, {
+    ...options,
+})
+
+// 환불 승인
+export const REFUND_ORDER = gql`
+  mutation($id:Int!) {
+    refundOrder(id:$id) {
+        id
+        state
+    }
+  }
+`
+interface RefundOrderData { }
+interface RefundOrderVars { id: number }
+export const useRefundOrder = (options?: MutationHookOptions<RefundOrderData, RefundOrderVars>) => createMutationHook<RefundOrderData, RefundOrderVars>(REFUND_ORDER, {
+    ...options,
+})
+
+
+// 교환 요청
+export const EXCHANGE_REQUEST_ORDERS = gql`
+  query{
+    exchangeRequestOrders(limit:1000){
+        id
+        stringOptionNum
+        deliveryNumber
+        deliveryCompany
+        deliveryCompletionDate
+        reason
+        state
+        payment {
+            id
+            address
+            addressName
+            addressPhone
+            deliveryMemo
+            postCode
+        }
+        item {
+            id
+            name
+            mainImage
+        }
+        user {
+            id
+            name
+        }
+    }
+  }
+`
+
+export interface ExchangeRequestOrder {
+    id: number
+    stringOptionNum: string
+    deliveryNumber: string
+    deliveryCompany: string
+    deliveryCompletionDate: Date
+    reason: string
+    state: OrderState
+    payment: {
+        id: number
+        address: string
+        addressName: string
+        addressPhone: string
+        deliveryMemo: string
+        postCode: string
+    }
+    item: {
+        id: number
+        name: string
+        mainImage: string
+    }
+    user: {
+        id: string
+        name: string
+    }
+}
+
+interface ExchangeRequestOrdersData { exchangeRequestOrders: ExchangeRequestOrder[] }
+interface ExchangeRequestOrdersVars { }
+export const useExchangeRequestOrders = (options?: QueryHookOptions<ExchangeRequestOrdersData, ExchangeRequestOrdersVars>) => createQueryHook<ExchangeRequestOrdersData, ExchangeRequestOrdersVars>(EXCHANGE_REQUEST_ORDERS, {
+    ...options,
+})
+
+// 교환 승인
+export const EXCHANGE_ORDER = gql`
+  mutation($id:Int!) {
+    exchangeOrder(id:$id) {
+        id
+        state
+    }
+  }
+`
+interface ExchangeOrderData { }
+interface ExchangeOrderVars { id: number }
+export const useExchangeOrder = (options?: MutationHookOptions<ExchangeOrderData, ExchangeOrderVars>) => createMutationHook<ExchangeOrderData, ExchangeOrderVars>(EXCHANGE_ORDER, {
+    ...options,
+})
+
+
+// 환불처리된 주문들 offset limit TODO
+export const REFUNDED_ORDERS = gql`
+  query{
+    refundedOrders{
+        id
+        stringOptionNum
+        deliveryNumber
+        deliveryCompany
+        deliveryCompletionDate
+        reason
+        payment {
+            id
+            address
+            addressName
+            addressPhone
+            deliveryMemo
+            postCode
+        }
+        item {
+            id
+            name
+            mainImage
+        }
+        user {
+            id
+            name
+        }
+    }
+  }
+`
+
+export interface RefundedOrder {
+    id: number
+    stringOptionNum: string
+    deliveryNumber: string
+    deliveryCompany: string
+    deliveryCompletionDate: Date
+    reason: string
+    payment: {
+        id: number
+        address: string
+        addressName: string
+        addressPhone: string
+        deliveryMemo: string
+        postCode: string
+    }
+    item: {
+        id: number
+        name: string
+        mainImage: string
+    }
+    user: {
+        id: string
+        name: string
+    }
+}
+
+interface RefundedOrdersData { refundedOrders: RefundedOrder[] }
+interface RefundedOrdersVars { }
+export const useRefundedOrders = (options?: QueryHookOptions<RefundedOrdersData, RefundedOrdersVars>) => createQueryHook<RefundedOrdersData, RefundedOrdersVars>(REFUNDED_ORDERS, {
+    ...options,
+})
+
+// 환불처리된 주문들 offset limit TODO
+export const EXCHANGED_ORDERS = gql`
+  query{
+    exchangedOrders{
+        id
+        stringOptionNum
+        deliveryNumber
+        deliveryCompany
+        deliveryCompletionDate
+        reason
+        payment {
+            id
+            address
+            addressName
+            addressPhone
+            deliveryMemo
+            postCode
+        }
+        item {
+            id
+            name
+            mainImage
+        }
+        user {
+            id
+            name
+        }
+    }
+  }
+`
+
+export interface ExchangedOrder {
+    id: number
+    stringOptionNum: string
+    deliveryNumber: string
+    deliveryCompany: string
+    deliveryCompletionDate: Date
+    reason: string
+    payment: {
+        id: number
+        address: string
+        addressName: string
+        addressPhone: string
+        deliveryMemo: string
+        postCode: string
+    }
+    item: {
+        id: number
+        name: string
+        mainImage: string
+    }
+    user: {
+        id: string
+        name: string
+    }
+}
+
+interface ExchangedOrdersData { exchangedOrders: ExchangedOrder[] }
+interface ExchangedOrdersVars { }
+export const useExchangedOrders = (options?: QueryHookOptions<ExchangedOrdersData, ExchangedOrdersVars>) => createQueryHook<ExchangedOrdersData, ExchangedOrdersVars>(EXCHANGED_ORDERS, {
+    ...options,
+})

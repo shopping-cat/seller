@@ -10,8 +10,8 @@ const dict = {
         'completedDelivery': { name: '배송완료' },
         'confirmed': { name: '구매확정' },
         // 클레임
-        'exchangeRequest': { name: '교환' },
-        'refundRequest': { name: '환불' },
+        'exchangeRequest': { name: '교환요청' },
+        'refundRequest': { name: '환불요청' },
         'exchanged': { name: '교환처리' },
         'refunded': { name: '환불처리' }
 
