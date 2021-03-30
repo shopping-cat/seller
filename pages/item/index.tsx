@@ -130,7 +130,7 @@ const item = () => {
                                 }
                             </>
                         ,
-                        onFilter: (value, record) => record.state.indexOf(value as string) === 0,
+                        onFilter: (value, record) => record.state === value,
                         align: 'center'
                     },
                     {

@@ -122,8 +122,8 @@ export const useOrderInfos = (options?: QueryHookOptions<OrderInfosData, OrderIn
 
 // 신구주문 리스트
 export const NEW_ORDERS = gql`
-  query($offset:Int, $limit:Int) {
-    newOrders(offset:$offset, limit:$limit) {
+  query {
+    newOrders(limit:1000) {
         id
         stringOptionNum
         state
@@ -237,3 +237,194 @@ export const useCancelOrder = (options?: MutationHookOptions<CancelOrderData, Ca
     ...options,
 })
 
+
+
+
+// 배송중인 주문
+export const COMPLETED_DELIVERY_ORDERS = gql`
+  query{
+    onDeliveryOrders(limit:1000){
+        id
+        stringOptionNum
+        deliveryNumber
+        deliveryCompany
+        payment {
+            id
+            address
+            addressName
+            addressPhone
+            deliveryMemo
+            postCode
+        }
+        item {
+            id
+            name
+            mainImage
+        }
+        user {
+            id
+            name
+        }
+    }
+  }
+`
+
+export interface OnDeliveryOrder {
+    id: number
+    stringOptionNum: string
+    deliveryNumber: string
+    deliveryCompany: string
+    payment: {
+        id: number
+        address: string
+        addressName: string
+        addressPhone: string
+        deliveryMemo: string
+        postCode: string
+    }
+    item: {
+        id: number
+        name: string
+        mainImage: string
+    }
+    user: {
+        id: string
+        name: string
+    }
+}
+
+interface OnDeliveryOrdersData { onDeliveryOrders: OnDeliveryOrder[] }
+interface OnDeliveryOrdersVars { }
+export const useOnDeliveryOrders = (options?: QueryHookOptions<OnDeliveryOrdersData, OnDeliveryOrdersVars>) => createQueryHook<OnDeliveryOrdersData, OnDeliveryOrdersVars>(COMPLETED_DELIVERY_ORDERS, {
+    ...options,
+})
+
+// 배송완료주문
+export const ON_DELIVERY_ORDERS = gql`
+  query{
+    completedDeliveryOrders(limit:1000){
+        id
+        stringOptionNum
+        deliveryNumber
+        deliveryCompany
+        deliveryCompletionDate
+        payment {
+            id
+            address
+            addressName
+            addressPhone
+            deliveryMemo
+            postCode
+        }
+        item {
+            id
+            name
+            mainImage
+        }
+        user {
+            id
+            name
+        }
+    }
+  }
+`
+
+export interface CompletedDeliveryOrder {
+    id: number
+    stringOptionNum: string
+    deliveryNumber: string
+    deliveryCompany: string
+    deliveryCompletionDate: Date
+    payment: {
+        id: number
+        address: string
+        addressName: string
+        addressPhone: string
+        deliveryMemo: string
+        postCode: string
+    }
+    item: {
+        id: number
+        name: string
+        mainImage: string
+    }
+    user: {
+        id: string
+        name: string
+    }
+}
+
+interface CompletedDeliveryOrdersData { completedDeliveryOrders: CompletedDeliveryOrder[] }
+interface CompletedDeliveryOrdersVars { }
+export const useCompletedDeliveryOrders = (options?: QueryHookOptions<CompletedDeliveryOrdersData, CompletedDeliveryOrdersVars>) => createQueryHook<CompletedDeliveryOrdersData, CompletedDeliveryOrdersVars>(ON_DELIVERY_ORDERS, {
+    ...options,
+})
+
+// 구매확정주문 offset limit TODO
+export const CONFIRMED_ORDERS = gql`
+  query{
+    confirmedOrders{
+        id
+        stringOptionNum
+        deliveryNumber
+        deliveryCompany
+        deliveryCompletionDate
+        payment {
+            id
+            address
+            addressName
+            addressPhone
+            deliveryMemo
+            postCode
+        }
+        item {
+            id
+            name
+            mainImage
+        }
+        user {
+            id
+            name
+        }
+        itemReview {
+            id
+            rate
+        }
+    }
+  }
+`
+
+export interface ConfirmedOrder {
+    id: number
+    stringOptionNum: string
+    deliveryNumber: string
+    deliveryCompany: string
+    deliveryCompletionDate: Date
+    payment: {
+        id: number
+        address: string
+        addressName: string
+        addressPhone: string
+        deliveryMemo: string
+        postCode: string
+    }
+    item: {
+        id: number
+        name: string
+        mainImage: string
+    }
+    user: {
+        id: string
+        name: string
+    }
+    itemReview: {
+        id: number
+        rate: number
+    } | null
+}
+
+interface ConfirmedOrdersData { confirmedOrders: ConfirmedOrder[] }
+interface ConfirmedOrdersVars { }
+export const useConfirmedOrders = (options?: QueryHookOptions<ConfirmedOrdersData, ConfirmedOrdersVars>) => createQueryHook<ConfirmedOrdersData, ConfirmedOrdersVars>(CONFIRMED_ORDERS, {
+    ...options,
+})
