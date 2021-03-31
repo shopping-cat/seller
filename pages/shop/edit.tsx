@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useShop, useUpdateShop } from '../../graphql/shop'
 import LoadingView from '../../components/View/LoadingView'
 import ShopImageUpload from '../../components/Upload/ShopImageUpload'
-import { Button, Form, Input, Upload } from 'antd'
+import { Button, Form, Input, Space, Upload } from 'antd'
 import styled from 'styled-components'
 import { useRouter } from 'next/dist/client/router'
 
@@ -62,6 +62,26 @@ const edit = () => {
                     label='이미지'
                 >
                     <ShopImageUpload />
+                </Form.Item>
+                <Form.Item
+                    name='refundInfo'
+                    label='환불방법'
+                    rules={[{ required: true, message: '필수입니다.' }]}
+                >
+                    <Input.TextArea
+                        placeholder='예시) 서울시 강남구 송파 타워 25층 53호로 이름과 휴대폰 번호를 동봉해서 보내주시면 됩니다. 금액은 반품이 확인된 이후에 진행 됩니다.'
+                        rows={5}
+                    />
+                </Form.Item>
+                <Form.Item
+                    name='exchangeInfo'
+                    label='교환방법'
+                    rules={[{ required: true, message: '필수입니다.' }]}
+                >
+                    <Input.TextArea
+                        placeholder='예시) 서울시 강남구 송파 타워 25층 53호로 이름, 휴대폰번호와 배송비 5,000원을 동봉해서 보내주시면 됩니다.'
+                        rows={5}
+                    />
                 </Form.Item>
                 <Form.Item {...tailLayout}>
                     <Button loading={updateLoading} type="primary" htmlType="submit">수정</Button>

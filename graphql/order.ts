@@ -363,7 +363,7 @@ export const useCompletedDeliveryOrders = (options?: QueryHookOptions<CompletedD
 // 구매확정주문 offset limit TODO
 export const CONFIRMED_ORDERS = gql`
   query{
-    confirmedOrders{
+    confirmedOrders(limit: 1000){
         id
         stringOptionNum
         deliveryNumber
@@ -423,7 +423,12 @@ export interface ConfirmedOrder {
     } | null
 }
 
-interface ConfirmedOrdersData { confirmedOrders: ConfirmedOrder[] }
+interface ConfirmedOrdersData {
+    shop: {
+        confirmedOrderNum: number
+    }
+    confirmedOrders: ConfirmedOrder[]
+}
 interface ConfirmedOrdersVars { }
 export const useConfirmedOrders = (options?: QueryHookOptions<ConfirmedOrdersData, ConfirmedOrdersVars>) => createQueryHook<ConfirmedOrdersData, ConfirmedOrdersVars>(CONFIRMED_ORDERS, {
     ...options,
@@ -595,7 +600,7 @@ export const useExchangeOrder = (options?: MutationHookOptions<ExchangeOrderData
 // 환불처리된 주문들 offset limit TODO
 export const REFUNDED_ORDERS = gql`
   query{
-    refundedOrders{
+    refundedOrders(limit:1000){
         id
         stringOptionNum
         deliveryNumber
@@ -658,7 +663,7 @@ export const useRefundedOrders = (options?: QueryHookOptions<RefundedOrdersData,
 // 환불처리된 주문들 offset limit TODO
 export const EXCHANGED_ORDERS = gql`
   query{
-    exchangedOrders{
+    exchangedOrders(limit:1000){
         id
         stringOptionNum
         deliveryNumber

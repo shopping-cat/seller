@@ -11,6 +11,8 @@ export const SHOP = gql`
         rate
         rateNum
         itemNum
+        refundInfo
+        exchangeInfo
         seller {
             id
             email
@@ -27,6 +29,8 @@ interface ShopData {
         rate: number
         rateNum: number
         itemNum: number
+        refundInfo: string
+        exchangeInfo: string
         seller: {
             id: number
             email: string
@@ -49,6 +53,8 @@ export const UPDATE_SHOP = gql`
             id
             shopName
             shopImage
+            refundInfo
+            exchangeInfo
         }
     }
 `
