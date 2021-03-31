@@ -18,6 +18,29 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
+const REFUND_EX = `예시)
+1. 기본 안내
+반품시 이름과 휴대폰 번호를 동봉해서 보내주세요. 금액은 반품이 확인된 이후에 진행 됩니다.
+
+2. 교환/반품자명
+쇼핑냥이
+
+3. 교환/반품지 주소
+우편번호 : 12345
+주소 : 서울시 강남구 송파 타워 25층 53호
+`
+const EXCHANGE_EX = `예시)
+1. 기본 안내
+반품시 이름,휴대폰번호와 배송비 5,000원을 동봉해서 보내주세요.
+
+2. 교환/반품자명
+쇼핑냥이
+
+3. 교환/반품지 주소
+우편번호 : 12345
+주소 : 서울시 강남구 송파 타워 25층 53호
+`
+
 const edit = () => {
 
     const { replace } = useRouter()
@@ -69,8 +92,8 @@ const edit = () => {
                     rules={[{ required: true, message: '필수입니다.' }]}
                 >
                     <Input.TextArea
-                        placeholder='예시) 서울시 강남구 송파 타워 25층 53호로 이름과 휴대폰 번호를 동봉해서 보내주시면 됩니다. 금액은 반품이 확인된 이후에 진행 됩니다.'
-                        rows={5}
+                        placeholder={REFUND_EX}
+                        rows={7}
                     />
                 </Form.Item>
                 <Form.Item
@@ -79,8 +102,8 @@ const edit = () => {
                     rules={[{ required: true, message: '필수입니다.' }]}
                 >
                     <Input.TextArea
-                        placeholder='예시) 서울시 강남구 송파 타워 25층 53호로 이름, 휴대폰번호와 배송비 5,000원을 동봉해서 보내주시면 됩니다.'
-                        rows={5}
+                        placeholder={EXCHANGE_EX}
+                        rows={7}
                     />
                 </Form.Item>
                 <Form.Item {...tailLayout}>

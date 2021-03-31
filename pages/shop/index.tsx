@@ -29,8 +29,8 @@ const shop = () => {
                 <Descriptions.Item span={3} label='상점이미지' ><Image src={data.shop.shopImage} style={{ height: 300, width: 300, objectFit: 'cover' }} /></Descriptions.Item>
             </Descriptions>
             <Descriptions style={{ marginTop: 16 }} title='환불/교환' extra={<Link href='/shop/edit'><a><Button type='primary' >수정</Button></a></Link>} bordered >
-                <Descriptions.Item span={1.5} label='환불방법' >{data.shop.refundInfo}</Descriptions.Item>
-                <Descriptions.Item span={1.5} label='교환방법' >{data.shop.exchangeInfo}</Descriptions.Item>
+                <Descriptions.Item span={3} label='환불방법' ><pre>{data.shop.refundInfo}</pre></Descriptions.Item>
+                <Descriptions.Item span={3} label='교환방법' ><pre>{data.shop.exchangeInfo}</pre></Descriptions.Item>
             </Descriptions>
         </Container>
     )
