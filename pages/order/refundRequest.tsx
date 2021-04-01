@@ -77,6 +77,11 @@ const refundedRequest = () => {
                         render: (_, r) => <div>{r.reason}</div>
                     },
                     {
+                        title: '상세사유',
+                        align: 'center',
+                        render: (_, r) => <div>{r.reasonDetail}</div>
+                    },
+                    {
                         title: '환불승인',
                         align: 'center',
                         render: (_, r) => {
@@ -87,7 +92,7 @@ const refundedRequest = () => {
                                 <Button loading={refundLoading} onClick={() => onConfirm(r.id)} >환불승인</Button>
                             </Space>
                         }
-                    }
+                    },
                 ]}
                 dataSource={data.refundRequestOrders}
             />

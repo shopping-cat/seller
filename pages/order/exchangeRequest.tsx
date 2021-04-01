@@ -76,6 +76,11 @@ const exchangeRequest = () => {
                         render: (_, r) => <div>{r.reason}</div>
                     },
                     {
+                        title: '상세사유',
+                        align: 'center',
+                        render: (_, r) => <div>{r.reasonDetail}</div>
+                    },
+                    {
                         title: '교환승인',
                         align: 'center',
                         render: (_, r) => {

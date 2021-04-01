@@ -445,6 +445,7 @@ export const REFUND_REQUEST_ORDERS = gql`
         deliveryCompany
         deliveryCompletionDate
         reason
+        reasonDetail
         state
         payment {
             id
@@ -474,6 +475,7 @@ export interface RefundRequestOrder {
     deliveryCompany: string
     deliveryCompletionDate: Date
     reason: string
+    reasonDetail: string
     state: OrderState
     payment: {
         id: number
@@ -526,6 +528,7 @@ export const EXCHANGE_REQUEST_ORDERS = gql`
         deliveryCompany
         deliveryCompletionDate
         reason
+        reasonDetail
         state
         payment {
             id
@@ -555,6 +558,7 @@ export interface ExchangeRequestOrder {
     deliveryCompany: string
     deliveryCompletionDate: Date
     reason: string
+    reasonDetail: string
     state: OrderState
     payment: {
         id: number
@@ -607,6 +611,7 @@ export const REFUNDED_ORDERS = gql`
         deliveryCompany
         deliveryCompletionDate
         reason
+        reasonDetail
         payment {
             id
             address
@@ -635,6 +640,7 @@ export interface RefundedOrder {
     deliveryCompany: string
     deliveryCompletionDate: Date
     reason: string
+    reasonDetail: string
     payment: {
         id: number
         address: string
@@ -670,6 +676,7 @@ export const EXCHANGED_ORDERS = gql`
         deliveryCompany
         deliveryCompletionDate
         reason
+        reasonDetail
         payment {
             id
             address
@@ -698,6 +705,7 @@ export interface ExchangedOrder {
     deliveryCompany: string
     deliveryCompletionDate: Date
     reason: string
+    reasonDetail: string
     payment: {
         id: number
         address: string

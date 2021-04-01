@@ -67,6 +67,11 @@ const exchanged = () => {
                         title: '교환사유',
                         align: 'center',
                         render: (_, r) => <div>{r.reason}</div>
+                    },
+                    {
+                        title: '상세사유',
+                        align: 'center',
+                        render: (_, r) => <div>{r.reasonDetail}</div>
                     }
                 ]}
                 dataSource={data.exchangedOrders}
