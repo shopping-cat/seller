@@ -1,4 +1,4 @@
-import { gql, MutationHookOptions, QueryHookOptions } from "@apollo/client"
+import { gql } from "@apollo/client"
 import { createMutationHook, createQueryHook } from "../lib/createApolloHook"
 
 // QUERY/SHOP
@@ -41,9 +41,7 @@ interface ShopData {
 interface ShopVars {
 
 }
-export const useShop = (options?: QueryHookOptions<ShopData, ShopVars>) => createQueryHook<ShopData, ShopVars>(SHOP, {
-    ...options,
-})
+export const useShop = createQueryHook<ShopData, ShopVars>(SHOP)
 
 
 
@@ -72,9 +70,7 @@ interface UpdateShopVars {
         shopImage: string
     }
 }
-export const useUpdateShop = (options?: MutationHookOptions<UpdateShopData, UpdateShopVars>) => createMutationHook<UpdateShopData, UpdateShopVars>(UPDATE_SHOP, {
-    ...options,
-})
+export const useUpdateShop = createMutationHook<UpdateShopData, UpdateShopVars>(UPDATE_SHOP)
 
 
 export const UPLOAD_SHOP_IMAGE = gql`
@@ -89,6 +85,4 @@ interface UploadShopImageData {
 interface UploadShopImageVars {
     image: File
 }
-export const useUploadShopImage = (options?: MutationHookOptions<UploadShopImageData, UploadShopImageVars>) => createMutationHook<UploadShopImageData, UploadShopImageVars>(UPLOAD_SHOP_IMAGE, {
-    ...options,
-})
+export const useUploadShopImage = createMutationHook<UploadShopImageData, UploadShopImageVars>(UPLOAD_SHOP_IMAGE)

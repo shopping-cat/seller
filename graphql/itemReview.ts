@@ -60,6 +60,4 @@ interface ItemReviewsData {
 interface ItemReviewsVars {
     id: number
 }
-export const useItemReviews = (options?: QueryHookOptions<ItemReviewsData, ItemReviewsVars>) => createQueryHook<ItemReviewsData, ItemReviewsVars>(ITEM_REVIEWS, {
-    ...options,
-})
+export const useItemReviews = createQueryHook<ItemReviewsData, ItemReviewsVars>(ITEM_REVIEWS)

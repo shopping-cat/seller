@@ -116,9 +116,7 @@ interface OrderInfosData {
 interface OrderInfosVars {
 
 }
-export const useOrderInfos = (options?: QueryHookOptions<OrderInfosData, OrderInfosVars>) => createQueryHook<OrderInfosData, OrderInfosVars>(ORDER_INFOS, {
-    ...options,
-})
+export const useOrderInfos = createQueryHook<OrderInfosData, OrderInfosVars>(ORDER_INFOS)
 
 // 신구주문 리스트
 export const NEW_ORDERS = gql`
@@ -180,9 +178,7 @@ interface NewOrdersVars {
     offset?: number
     limit?: number
 }
-export const useNewOrders = (options?: QueryHookOptions<NewOrdersData, NewOrdersVars>) => createQueryHook<NewOrdersData, NewOrdersVars>(NEW_ORDERS, {
-    ...options,
-})
+export const useNewOrders = createQueryHook<NewOrdersData, NewOrdersVars>(NEW_ORDERS)
 
 
 export const REGIST_DELIVERY = gql`
@@ -206,9 +202,7 @@ interface RegistDeliveryVars {
     deliveryNumber: string
     deliveryCompany: string
 }
-export const useRegistDelivery = (options?: MutationHookOptions<RegistDeliveryData, RegistDeliveryVars>) => createMutationHook<RegistDeliveryData, RegistDeliveryVars>(REGIST_DELIVERY, {
-    ...options,
-})
+export const useRegistDelivery = createMutationHook<RegistDeliveryData, RegistDeliveryVars>(REGIST_DELIVERY)
 
 
 export const CANCEL_ORDER = gql`
@@ -233,9 +227,7 @@ interface CancelOrderVars {
     id: number
     reason: string
 }
-export const useCancelOrder = (options?: MutationHookOptions<CancelOrderData, CancelOrderVars>) => createMutationHook<CancelOrderData, CancelOrderVars>(CANCEL_ORDER, {
-    ...options,
-})
+export const useCancelOrder = createMutationHook<CancelOrderData, CancelOrderVars>(CANCEL_ORDER)
 
 
 
@@ -295,9 +287,7 @@ export interface OnDeliveryOrder {
 
 interface OnDeliveryOrdersData { onDeliveryOrders: OnDeliveryOrder[] }
 interface OnDeliveryOrdersVars { }
-export const useOnDeliveryOrders = (options?: QueryHookOptions<OnDeliveryOrdersData, OnDeliveryOrdersVars>) => createQueryHook<OnDeliveryOrdersData, OnDeliveryOrdersVars>(COMPLETED_DELIVERY_ORDERS, {
-    ...options,
-})
+export const useOnDeliveryOrders = createQueryHook<OnDeliveryOrdersData, OnDeliveryOrdersVars>(COMPLETED_DELIVERY_ORDERS)
 
 // 배송완료주문
 export const ON_DELIVERY_ORDERS = gql`
@@ -356,9 +346,7 @@ export interface CompletedDeliveryOrder {
 
 interface CompletedDeliveryOrdersData { completedDeliveryOrders: CompletedDeliveryOrder[] }
 interface CompletedDeliveryOrdersVars { }
-export const useCompletedDeliveryOrders = (options?: QueryHookOptions<CompletedDeliveryOrdersData, CompletedDeliveryOrdersVars>) => createQueryHook<CompletedDeliveryOrdersData, CompletedDeliveryOrdersVars>(ON_DELIVERY_ORDERS, {
-    ...options,
-})
+export const useCompletedDeliveryOrders = createQueryHook<CompletedDeliveryOrdersData, CompletedDeliveryOrdersVars>(ON_DELIVERY_ORDERS)
 
 // 구매확정주문 offset limit TODO
 export const CONFIRMED_ORDERS = gql`
@@ -430,9 +418,7 @@ interface ConfirmedOrdersData {
     confirmedOrders: ConfirmedOrder[]
 }
 interface ConfirmedOrdersVars { }
-export const useConfirmedOrders = (options?: QueryHookOptions<ConfirmedOrdersData, ConfirmedOrdersVars>) => createQueryHook<ConfirmedOrdersData, ConfirmedOrdersVars>(CONFIRMED_ORDERS, {
-    ...options,
-})
+export const useConfirmedOrders = createQueryHook<ConfirmedOrdersData, ConfirmedOrdersVars>(CONFIRMED_ORDERS)
 
 
 // 환불 요청
@@ -498,9 +484,7 @@ export interface RefundRequestOrder {
 
 interface RefundRequestOrdersData { refundRequestOrders: RefundRequestOrder[] }
 interface RefundRequestOrdersVars { }
-export const useRefundRequestOrders = (options?: QueryHookOptions<RefundRequestOrdersData, RefundRequestOrdersVars>) => createQueryHook<RefundRequestOrdersData, RefundRequestOrdersVars>(REFUND_REQUEST_ORDERS, {
-    ...options,
-})
+export const useRefundRequestOrders = createQueryHook<RefundRequestOrdersData, RefundRequestOrdersVars>(REFUND_REQUEST_ORDERS)
 
 // 환불 승인
 export const REFUND_ORDER = gql`
@@ -513,9 +497,7 @@ export const REFUND_ORDER = gql`
 `
 interface RefundOrderData { }
 interface RefundOrderVars { id: number }
-export const useRefundOrder = (options?: MutationHookOptions<RefundOrderData, RefundOrderVars>) => createMutationHook<RefundOrderData, RefundOrderVars>(REFUND_ORDER, {
-    ...options,
-})
+export const useRefundOrder = createMutationHook<RefundOrderData, RefundOrderVars>(REFUND_ORDER)
 
 
 // 교환 요청
@@ -581,9 +563,7 @@ export interface ExchangeRequestOrder {
 
 interface ExchangeRequestOrdersData { exchangeRequestOrders: ExchangeRequestOrder[] }
 interface ExchangeRequestOrdersVars { }
-export const useExchangeRequestOrders = (options?: QueryHookOptions<ExchangeRequestOrdersData, ExchangeRequestOrdersVars>) => createQueryHook<ExchangeRequestOrdersData, ExchangeRequestOrdersVars>(EXCHANGE_REQUEST_ORDERS, {
-    ...options,
-})
+export const useExchangeRequestOrders = createQueryHook<ExchangeRequestOrdersData, ExchangeRequestOrdersVars>(EXCHANGE_REQUEST_ORDERS)
 
 // 교환 승인
 export const EXCHANGE_ORDER = gql`
@@ -596,9 +576,7 @@ export const EXCHANGE_ORDER = gql`
 `
 interface ExchangeOrderData { }
 interface ExchangeOrderVars { id: number }
-export const useExchangeOrder = (options?: MutationHookOptions<ExchangeOrderData, ExchangeOrderVars>) => createMutationHook<ExchangeOrderData, ExchangeOrderVars>(EXCHANGE_ORDER, {
-    ...options,
-})
+export const useExchangeOrder = createMutationHook<ExchangeOrderData, ExchangeOrderVars>(EXCHANGE_ORDER)
 
 
 // 환불처리된 주문들 offset limit TODO
@@ -662,9 +640,7 @@ export interface RefundedOrder {
 
 interface RefundedOrdersData { refundedOrders: RefundedOrder[] }
 interface RefundedOrdersVars { }
-export const useRefundedOrders = (options?: QueryHookOptions<RefundedOrdersData, RefundedOrdersVars>) => createQueryHook<RefundedOrdersData, RefundedOrdersVars>(REFUNDED_ORDERS, {
-    ...options,
-})
+export const useRefundedOrders = createQueryHook<RefundedOrdersData, RefundedOrdersVars>(REFUNDED_ORDERS)
 
 // 환불처리된 주문들 offset limit TODO
 export const EXCHANGED_ORDERS = gql`
@@ -727,6 +703,4 @@ export interface ExchangedOrder {
 
 interface ExchangedOrdersData { exchangedOrders: ExchangedOrder[] }
 interface ExchangedOrdersVars { }
-export const useExchangedOrders = (options?: QueryHookOptions<ExchangedOrdersData, ExchangedOrdersVars>) => createQueryHook<ExchangedOrdersData, ExchangedOrdersVars>(EXCHANGED_ORDERS, {
-    ...options,
-})
+export const useExchangedOrders = createQueryHook<ExchangedOrdersData, ExchangedOrdersVars>(EXCHANGED_ORDERS)

@@ -1,4 +1,4 @@
-import { gql, MutationHookOptions, QueryHookOptions, useApolloClient } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { ItemState, ItemRequireInformation, ItemOption } from "../constants/type";
 import { createMutationHook, createQueryHook } from "../lib/createApolloHook";
 
@@ -95,9 +95,7 @@ interface ItemData {
 interface ItemVars {
     id: number
 }
-export const useItem = (options?: QueryHookOptions<ItemData, ItemVars>) => createQueryHook<ItemData, ItemVars>(ITEM, {
-    ...options,
-})
+export const useItem = createQueryHook<ItemData, ItemVars>(ITEM)
 
 // QUERY/ITEMS
 export const ITEMS = gql`
@@ -144,9 +142,7 @@ interface ItemsData {
 interface ItemsVars {
 
 }
-export const useItems = (options?: QueryHookOptions<ItemsData, ItemsVars>) => createQueryHook<ItemsData, ItemsVars>(ITEMS, {
-    ...options,
-})
+export const useItems = createQueryHook<ItemsData, ItemsVars>(ITEMS)
 
 // QUERY/CREATE_ITEM
 export const CREATE_ITEM = gql`
@@ -176,9 +172,7 @@ interface CreateItemVars {
         html: string
     }
 }
-export const useCreateItem = (options?: MutationHookOptions<CreateItemData, CreateItemVars>) => createMutationHook<CreateItemData, CreateItemVars>(CREATE_ITEM, {
-    ...options,
-})
+export const useCreateItem = createMutationHook<CreateItemData, CreateItemVars>(CREATE_ITEM)
 
 
 // QUERY/UPDATE_ITEM
@@ -226,9 +220,7 @@ interface UpdateItemVars {
         html: string
     }
 }
-export const useUpdateItem = (options?: MutationHookOptions<UpdateItemData, UpdateItemVars>) => createMutationHook<UpdateItemData, UpdateItemVars>(UPDATE_ITEM, {
-    ...options,
-})
+export const useUpdateItem = createMutationHook<UpdateItemData, UpdateItemVars>(UPDATE_ITEM)
 
 // QUERY/UPDATE_ITEM_STATE
 export const UPDATE_ITEM_STATE = gql`
@@ -250,9 +242,7 @@ interface UpdateItemStateVars {
     id: number
     state: string
 }
-export const useUpdateItemState = (options?: MutationHookOptions<UpdateItemStateData, UpdateItemStateVars>) => createMutationHook<UpdateItemStateData, UpdateItemStateVars>(UPDATE_ITEM_STATE, {
-    ...options,
-})
+export const useUpdateItemState = createMutationHook<UpdateItemStateData, UpdateItemStateVars>(UPDATE_ITEM_STATE)
 
 // QUERY/DELETE_ITEM
 export const DELETE_ITEM = gql`
@@ -271,12 +261,10 @@ interface DeleteItemData {
 interface DeleteItemVars {
     id: number
 }
-export const useDeleteItem = (options?: MutationHookOptions<DeleteItemData, DeleteItemVars>) => createMutationHook<DeleteItemData, DeleteItemVars>(DELETE_ITEM, {
-    ...options,
-})
+export const useDeleteItem = createMutationHook<DeleteItemData, DeleteItemVars>(DELETE_ITEM)
 
-// QUERY/DELETE_ITEM_UPDATe
-export const DELETE_ITEM_UPDATe = gql`
+// QUERY/DELETE_ITEM_UPDATE
+export const DELETE_ITEM_UPDATE = gql`
   mutation ($id: Int!) {
     deleteItemUpdate(id:$id) {
         id
@@ -292,6 +280,4 @@ interface DeleteItemUpdateData {
 interface DeleteItemUpdateVars {
     id: number
 }
-export const useDeleteItemUpdate = (options?: MutationHookOptions<DeleteItemUpdateData, DeleteItemUpdateVars>) => createMutationHook<DeleteItemUpdateData, DeleteItemUpdateVars>(DELETE_ITEM_UPDATe, {
-    ...options,
-})
+export const useDeleteItemUpdate = createMutationHook<DeleteItemUpdateData, DeleteItemUpdateVars>(DELETE_ITEM_UPDATE)

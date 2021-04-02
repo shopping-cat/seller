@@ -25,11 +25,6 @@ const refunded = () => {
                         align: 'center',
                         render: (_, r) => <div>{r.item.name} ({r.stringOptionNum})</div>,
                     },
-                    // {
-                    //     title: '주소',
-                    //     align: 'center',
-                    //     render: (_, r) => <div>{r.payment.address}</div>,
-                    // },
                     {
                         title: '우편번호',
                         align: 'center',

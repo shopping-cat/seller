@@ -26,11 +26,6 @@ const exchanged = () => {
                         render: (_, r) => <div>{r.item.name} ({r.stringOptionNum})</div>,
                     },
                     {
-                        title: '주소',
-                        align: 'center',
-                        render: (_, r) => <div>{r.payment.address}</div>,
-                    },
-                    {
                         title: '우편번호',
                         align: 'center',
                         render: (_, r) => <div>{r.payment.postCode}</div>,
@@ -44,11 +39,6 @@ const exchanged = () => {
                         title: '수령인 전화번호',
                         align: 'center',
                         render: (_, r) => <div>{r.payment.addressPhone}</div>,
-                    },
-                    {
-                        title: '배송메모',
-                        align: 'center',
-                        render: (_, r) => <div>{r.payment.deliveryMemo}</div>,
                     },
                     {
                         title: '택배사/송장번호',

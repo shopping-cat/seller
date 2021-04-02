@@ -6,20 +6,25 @@ const errorLogger = (error: ApolloError) => {
     alert(error.message)
 }
 
-export const createMutationHook = <Data, Vars>(mutation: DocumentNode, options?: MutationHookOptions<Data, Vars>) =>
-    useMutation<Data, Vars>(mutation, {
-        ...options,
-        onError: (error) => {
-            errorLogger(error)
-            options?.onError && options.onError(error)
-        }
-    })
-
-export const createQueryHook = <Data, Vars>(query: DocumentNode, options?: QueryHookOptions<Data, Vars>) =>
+export const createQueryHook = <Data, Vars>(query: DocumentNode, preOptions?: QueryHookOptions<Data, Vars>) => (options?: QueryHookOptions<Data, Vars>) =>
     useQuery<Data, Vars>(query, {
+        ...preOptions,
         ...options,
         onError: (error) => {
             errorLogger(error)
             options?.onError && options.onError(error)
         },
     })
+
+
+export const createMutationHook = <Data, Vars>(query: DocumentNode, preOptions?: MutationHookOptions<Data, Vars>) => (options?: MutationHookOptions<Data, Vars>) =>
+    useMutation<Data, Vars>(query, {
+        ...preOptions,
+        ...options,
+        onError: (error) => {
+            errorLogger(error)
+            options?.onError && options.onError(error)
+        },
+    })
+
+

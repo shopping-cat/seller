@@ -1,4 +1,3 @@
-import { MutationHookOptions } from "@apollo/client"
 import { gql } from "@apollo/client/core"
 import { createMutationHook } from '../lib/createApolloHook'
 
@@ -23,6 +22,4 @@ interface CreateItemImageData {
 interface CreateItemImageVars {
     image: File
 }
-export const useCreateItemImage = (options?: MutationHookOptions<CreateItemImageData, CreateItemImageVars>) => createMutationHook<CreateItemImageData, CreateItemImageVars>(CREATE_ITEM_IMAGE, {
-    ...options,
-})
+export const useCreateItemImage = createMutationHook<CreateItemImageData, CreateItemImageVars>(CREATE_ITEM_IMAGE)
