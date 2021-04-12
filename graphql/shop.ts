@@ -13,6 +13,12 @@ export const SHOP = gql`
         itemNum
         refundInfo
         exchangeInfo
+        kakaoLink
+        csPhone
+        bankAccountNumber
+        bankName    
+        bankOwnerName
+        kakaoId
         seller {
             id
             email
@@ -31,6 +37,12 @@ interface ShopData {
         itemNum: number
         refundInfo: string
         exchangeInfo: string
+        kakaoLink: string
+        csPhone: string
+        bankAccountNumber: string
+        bankName: string
+        bankOwnerName: string
+        kakaoId: string
         seller: {
             id: number
             email: string
@@ -53,6 +65,12 @@ export const UPDATE_SHOP = gql`
             shopImage
             refundInfo
             exchangeInfo
+            kakaoLink
+            csPhone
+            bankAccountNumber
+            bankName    
+            bankOwnerName
+            kakaoId
         }
     }
 `
@@ -68,6 +86,14 @@ interface UpdateShopVars {
     input: {
         shopName: string
         shopImage: string
+        refundInfo: string
+        exchangeInfo: string
+        kakaoId: string
+        kakaoLink: string
+        csPhone: string
+        bankAccountNumber: string
+        bankName: string
+        BankOwnerName: string
     }
 }
 export const useUpdateShop = createMutationHook<UpdateShopData, UpdateShopVars>(UPDATE_SHOP)

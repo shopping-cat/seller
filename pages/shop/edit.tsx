@@ -73,10 +73,17 @@ const edit = () => {
                 title='상품정보 수정'
                 onFinish={onFinish}
             >
+                <h1>기본정보</h1>
                 <Form.Item
                     name='shopName'
                     label='상점이름'
                     rules={[{ required: true, message: '필수입니다.' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name='kakaoId'
+                    label='카카오톡 아이디 (주문시 채팅 보내드립니다)'
                 >
                     <Input />
                 </Form.Item>
@@ -86,14 +93,63 @@ const edit = () => {
                 >
                     <ShopImageUpload />
                 </Form.Item>
+                <h1>정산</h1>
+                <Form.Item
+                    name='bankOwnerName'
+                    label='예금주'
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name='bankName'
+                    label='은행'
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name='bankAccountNumber'
+                    label='계좌번호'
+                >
+                    <Input />
+                </Form.Item>
+                <h1>CS</h1>
+                <Form.Item
+                    name='kakaoLink'
+                    label={<div>카카오톡 채널 채팅 링크 (추천!!) <a href='https://www.youtube.com/watch?v=NBk9xl-AJ_0' >참고 링크</a></div>}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name='csPhone'
+                    label='고객센터 번호'
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label='환불방법 예시'
+                >
+                    <Input.TextArea
+                        disabled
+                        value={REFUND_EX}
+                        rows={10}
+                    />
+                </Form.Item>
                 <Form.Item
                     name='refundInfo'
                     label='환불방법'
                     rules={[{ required: true, message: '필수입니다.' }]}
                 >
                     <Input.TextArea
-                        placeholder={REFUND_EX}
-                        rows={7}
+                        rows={10}
+                    />
+                </Form.Item>
+                <Form.Item
+                    label='교환방법 예시'
+                >
+                    <Input.TextArea
+                        disabled
+                        value={EXCHANGE_EX}
+                        rows={10}
                     />
                 </Form.Item>
                 <Form.Item
@@ -102,8 +158,7 @@ const edit = () => {
                     rules={[{ required: true, message: '필수입니다.' }]}
                 >
                     <Input.TextArea
-                        placeholder={EXCHANGE_EX}
-                        rows={7}
+                        rows={10}
                     />
                 </Form.Item>
                 <Form.Item {...tailLayout}>
