@@ -24,6 +24,8 @@ export type ItemState =
     '상품등록요청' |
     '상품수정요청'
 
+export type ProfitReceiptState = '정산요청' | '정산완료'
+
 export type ItemOption = {
     data: {
         optionGroupName: string

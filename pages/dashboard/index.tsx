@@ -8,6 +8,8 @@ import LabelText from '../../components/text/LabelText'
 import dynamic from 'next/dynamic';
 import { Line as AntdLine } from '@ant-design/charts'
 import moneyFormat from '../../lib/moneyFormat'
+import { useDashboard } from '../../graphql/dashboard'
+import LoadingView from '../../components/View/LoadingView'
 import dayjs from 'dayjs'
 
 const Line = dynamic(
@@ -25,38 +27,13 @@ const RowContainer = styled.div`
     flex-grow:1;
 `
 
-const data = [
-    {
-        '월': '1',
-        '수익': 3303623,
-    },
-    {
-        '월': '2',
-        '수익': 1255303,
-    },
-    {
-        '월': '3',
-        '수익': 3350230,
-    },
-    {
-        '월': '4',
-        '수익': 5235053,
-    },
-    {
-        '월': '5',
-        '수익': 3523523,
-    },
-    {
-        '월': '6',
-        '수익': 6436344,
-    },
-]
 
 const dashboard = () => {
 
     const { push } = useRouter()
-    // const { data } = useItem({ variables: { id: 1 } })
+    const { data, loading } = useDashboard()
 
+    if (loading) return <LoadingView />
 
     return (
         <Container >
@@ -93,9 +70,9 @@ const dashboard = () => {
                             title='수익'
                             extra={<Link href='/profit' ><a><ArrowRightOutlined /></a></Link>}
                         >
-                            <Statistic title='잔고' value={112893} style={{ marginBottom: 24 }} />
+                            <Statistic title='잔고' value={data.shop.balance} style={{ marginBottom: 24 }} />
                             <Line
-                                data={data}
+                                data={data.monthlyProfit.map((v, index) => ({ '수익': v, '월': (dayjs().add(index - data.monthlyProfit.length + 1, 'month').month() + 1).toString() }))}
                                 xField='월'
                                 yField='수익'
                                 xAxis={{
@@ -105,7 +82,7 @@ const dashboard = () => {
                                 }}
                                 yAxis={{
                                     label: {
-                                        formatter: v => moneyFormat(Number(v)),
+                                        formatter: v => moneyFormat(Number(v))
                                     },
                                 }}
                                 point={{
