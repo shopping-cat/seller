@@ -33,6 +33,7 @@ const AppContainer: React.FC = ({ children }) => {
 
   const onAuthStateChanged = async (user: firebase.User) => {
     setLogedIn(!!user)
+    console.log(user ? 'loggedin' : 'loggedout')
     if (!user) {
       replace('/login')
     } else if (user && asPath === '/login') {

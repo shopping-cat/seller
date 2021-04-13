@@ -32,7 +32,7 @@ class MyDocument extends Document {
             <Html>
                 <Head>
                     <style />
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.14.0/antd.css" />
+                    {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.14.0/antd.css" /> */}
                     {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/react-toastify@6.0.8/dist/ReactToastify.css" /> */}
                 </Head>
                 <body>

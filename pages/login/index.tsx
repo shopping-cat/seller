@@ -7,6 +7,7 @@ const Container = styled.div`
     width: 100vw;
     height: 100vh;
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
 `
@@ -24,6 +25,7 @@ const login = () => {
 
     return (
         <Container>
+            <h3>로그인이 안된다면 새로고침을 해주세요</h3>
             <FormContainer
                 name="basic"
                 onFinish={onFinish}
