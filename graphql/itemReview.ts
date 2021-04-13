@@ -61,3 +61,48 @@ interface ItemReviewsVars {
     id: number
 }
 export const useItemReviews = createQueryHook<ItemReviewsData, ItemReviewsVars>(ITEM_REVIEWS)
+
+export const RECENT_REVIEWS = gql`
+  query{
+    shop {
+        id
+        rate
+        rateNum
+    }
+    recentReviews{
+        id
+        createdAt
+        likeNum
+        content
+        rate
+        images {
+            id
+            uri
+        }
+        order {
+            id
+            totalPrice
+            stringOptionNum
+        }
+        user {
+            id
+            name
+            photo
+        }
+        item {
+            id
+            name
+        }
+    }
+  }
+`
+interface RecentReviewsData {
+    shop: {
+        id: number
+        rate: number
+        rateNum: number
+    }
+    recentReviews: ItemReview[]
+}
+interface RecentReviewsVars { }
+export const useRecentReviews = createQueryHook<RecentReviewsData, RecentReviewsVars>(RECENT_REVIEWS)
