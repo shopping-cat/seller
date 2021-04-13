@@ -4,7 +4,6 @@ import cache from './cache'
 import { createUploadLink } from 'apollo-upload-client';
 import { auth } from '../firebase';
 
-
 const httpLink = createUploadLink({
     uri: process.env.NEXT_PUBLIC_GRAPHQL_SERVER_URL,
     credentials: 'include', // 쿠키를 위한 용도
