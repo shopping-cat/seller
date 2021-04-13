@@ -42,8 +42,6 @@ const dashboard = () => {
                     <Col span={6} >
                         <Card title='주문' extra={<Link href='/order' ><a><ArrowRightOutlined /></a></Link>} >
                             <LabelText onPress={() => push('/order/new')} label='신규주문' >{data.shop.newOrderNum}</LabelText>
-                            {/* <LabelText onPress={() => push('/order/deliveryReady')} label='배송준비' >{1}</LabelText> */}
-
                         </Card>
                     </Col>
                     <Col span={6} >
@@ -103,10 +101,10 @@ const dashboard = () => {
                             extra={<Link href='/review' ><a><ArrowRightOutlined /></a></Link>}
                         >
                             <List
-                                dataSource={['문의드립니다']}
+                                dataSource={data.recentReviews}
                                 renderItem={item => (
                                     <List.Item>
-                                        {item}
+                                        <div style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} >{item.rate}점 / 내용 : {item.content}</div>
                                     </List.Item>
                                 )}
                             />

@@ -15,6 +15,11 @@ export const DASHBOARD = gql`
         refundedOrderNum
         exchangedOrderNum
     }
+    recentReviews(limit:5) {
+      id
+      content
+      rate
+    }
     monthlyProfit
   }
 `
@@ -31,6 +36,11 @@ interface DashboardData {
     refundedOrderNum: number
     exchangedOrderNum: number
   }
+  recentReviews: {
+    id: number
+    content: string
+    rate: number
+  }[]
   monthlyProfit: number[]
 }
 interface DashboardVars {
