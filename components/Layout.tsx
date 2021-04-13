@@ -74,10 +74,10 @@ const CollapsedTitle = styled.a`
 
 const menuItems = [
     { route: 'dashboard', name: '대시보드', icon: <PieChartOutlined /> },
-    { route: 'shop', name: '상점관리', icon: <ShopOutlined /> },
     { route: 'order', name: '주문관리', icon: <DesktopOutlined /> },
-    // { route: 'inquery', name: '문의관리', icon: <MessageOutlined /> },
+    { route: 'shop', name: '상점관리', icon: <ShopOutlined /> },
     { route: 'item', name: '상품관리', icon: <ShoppingOutlined /> },
+    { route: 'review', name: '리뷰관리', icon: <MessageOutlined /> },
     { route: 'profit', name: '수익관리', icon: <DollarCircleOutlined /> },
 ]
 

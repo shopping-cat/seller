@@ -16,8 +16,11 @@ const dict = {
         'refunded': { name: '환불처리' }
 
     },
-    'inquery': {
-        name: '문의관리'
+    'review': {
+        name: '리뷰관리',
+        default: {
+            name: '리뷰세부'
+        }
     },
     'shop': {
         name: '상점관리',
@@ -34,7 +37,7 @@ const dict = {
     },
     'profit': {
         name: '수익관리'
-    }
+    },
 }
 
 const pathToKorean = (path: string) => {

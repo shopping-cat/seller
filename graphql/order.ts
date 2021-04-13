@@ -16,7 +16,7 @@ export const ORDER_INFOS = gql`
         refundedOrderNum
         exchangedOrderNum
     }
-    newOrders {
+    newOrders(limit:5) {
         id
         stringOptionNum
         item {
@@ -24,7 +24,7 @@ export const ORDER_INFOS = gql`
             name
         }
     }
-    onDeliveryOrders {
+    onDeliveryOrders(limit:5) {
         id
         stringOptionNum
         item {
@@ -32,7 +32,7 @@ export const ORDER_INFOS = gql`
             name
         }
     }
-    completedDeliveryOrders {
+    completedDeliveryOrders(limit:5) {
         id
         stringOptionNum
         item {
@@ -40,7 +40,7 @@ export const ORDER_INFOS = gql`
             name
         }
     }
-    confirmedOrders {
+    confirmedOrders(limit:5){
         id
         stringOptionNum
         item {
@@ -48,7 +48,7 @@ export const ORDER_INFOS = gql`
             name
         }
     }
-    refundRequestOrders {
+    refundRequestOrders(limit:5) {
         id
         stringOptionNum
         item {
@@ -56,7 +56,7 @@ export const ORDER_INFOS = gql`
             name
         }
     }
-    exchangeRequestOrders {
+    exchangeRequestOrders(limit:5) {
         id
         stringOptionNum
         item {
@@ -64,7 +64,7 @@ export const ORDER_INFOS = gql`
             name
         }
     }
-    refundedOrders {
+    refundedOrders(limit:5) {
         id
         stringOptionNum
         item {
@@ -72,7 +72,7 @@ export const ORDER_INFOS = gql`
             name
         }
     }
-    exchangedOrders {
+    exchangedOrders(limit:5) {
         id
         stringOptionNum
         item {

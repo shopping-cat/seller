@@ -41,36 +41,35 @@ const dashboard = () => {
                 <Row gutter={[16, 16]} >
                     <Col span={6} >
                         <Card title='주문' extra={<Link href='/order' ><a><ArrowRightOutlined /></a></Link>} >
-                            <LabelText onPress={() => push('/order/new')} label='신규주문' >{1}</LabelText>
+                            <LabelText onPress={() => push('/order/new')} label='신규주문' >{data.shop.newOrderNum}</LabelText>
                             {/* <LabelText onPress={() => push('/order/deliveryReady')} label='배송준비' >{1}</LabelText> */}
 
                         </Card>
                     </Col>
                     <Col span={6} >
                         <Card title='배송' extra={<Link href='/order' ><a><ArrowRightOutlined /></a></Link>} >
-                            <LabelText onPress={() => push('/order/onDelivery')} label='배송중' >{1}</LabelText>
-                            <LabelText onPress={() => push('/order/completedDelivery')} label='배송완료' >{1}</LabelText>
+                            <LabelText onPress={() => push('/order/onDelivery')} label='배송중' >{data.shop.onDeliveryOrderNum}</LabelText>
+                            <LabelText onPress={() => push('/order/completedDelivery')} label='배송완료' >{data.shop.completedDeliveryOrderNum}</LabelText>
                         </Card>
                     </Col>
                     <Col span={6} >
                         <Card title='클레임' extra={<Link href='/order' ><a><ArrowRightOutlined /></a></Link>} >
-                            <LabelText onPress={() => push('/order/exchangeRequest')} label='교환요청' >{1}</LabelText>
-                            <LabelText onPress={() => push('/order/refundRequest')} label='환불요청' >{1}</LabelText>
+                            <LabelText onPress={() => push('/order/exchangeRequest')} label='교환요청' >{data.shop.exchangeRequestOrderNum}</LabelText>
+                            <LabelText onPress={() => push('/order/refundRequest')} label='환불요청' >{data.shop.refundRequestOrderNum}</LabelText>
                         </Card>
                     </Col>
                     <Col span={6} >
                         <Card title='정산' extra={<Link href='/profit' ><a><ArrowRightOutlined /></a></Link>} >
-                            <LabelText onPress={() => push('/profit')} label='정산예정' >{1}</LabelText>
-                            <LabelText onPress={() => push('/profit')} label='오늘정산완료' >{1}</LabelText>
+                            <LabelText onPress={() => push('/profit')} label='구매확정' >{data.shop.confirmedOrderNum}</LabelText>
+                            <LabelText onPress={() => push('/profit')} label='정산 가능 금액' >{moneyFormat(data.shop.balance)}</LabelText>
                         </Card>
                     </Col>
 
                     <Col span={12} >
                         <Card
-                            title='수익'
+                            title='월별 수익'
                             extra={<Link href='/profit' ><a><ArrowRightOutlined /></a></Link>}
                         >
-                            <Statistic title='잔고' value={data.shop.balance} style={{ marginBottom: 24 }} />
                             <Line
                                 data={data.monthlyProfit.map((v, index) => ({ '수익': v, '월': (dayjs().add(index - data.monthlyProfit.length + 1, 'month').month() + 1).toString() }))}
                                 xField='월'
@@ -100,27 +99,11 @@ const dashboard = () => {
 
                     <Col span={6} >
                         <Card
-                            title={`미답변문의 (${10})`}
-                            extra={<Link href='/inquery' ><a><ArrowRightOutlined /></a></Link>}
+                            title={`신규리뷰`}
+                            extra={<Link href='/review' ><a><ArrowRightOutlined /></a></Link>}
                         >
                             <List
                                 dataSource={['문의드립니다']}
-                                renderItem={item => (
-                                    <List.Item>
-                                        {item}
-                                    </List.Item>
-                                )}
-                            />
-                        </Card>
-                    </Col>
-
-                    <Col span={6} >
-                        <Card
-                            title='공지사항'
-                            extra={<Link href='/notification' ><a><ArrowRightOutlined /></a></Link>}
-                        >
-                            <List
-                                dataSource={['공지사항']}
                                 renderItem={item => (
                                     <List.Item>
                                         {item}

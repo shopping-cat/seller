@@ -1,6 +1,7 @@
 import { Line as AntdLine } from '@ant-design/charts'
 import { Button, Col, Row, Space, Statistic, Table } from 'antd'
 import dayjs from 'dayjs'
+import { useRouter } from 'next/dist/client/router'
 import dynamic from 'next/dynamic'
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
@@ -23,13 +24,19 @@ const Container = styled.div`
 
 const profit = () => {
 
+    const { reload } = useRouter()
     const { data } = useProfit()
     const [createProfitReceipt, { loading }] = useCreateProfitReceipt()
 
-    const onRequestCalculate = useCallback(() => {
-        if (loading) return
-        if (!confirm(`${moneyFormat(data.shop.balance)}원이 영업일로 3일 이내에 입금됩니다.`)) return
-        createProfitReceipt()
+    const onRequestCalculate = useCallback(async () => {
+        try {
+            if (loading) return
+            if (!confirm(`${moneyFormat(data.shop.balance)}원이 영업일로 3일 이내에 입금됩니다.`)) return
+            await createProfitReceipt()
+            reload()
+        } catch (error) {
+
+        }
     }, [loading, data])
 
     if (!data) return <LoadingView />

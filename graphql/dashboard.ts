@@ -6,16 +6,32 @@ export const DASHBOARD = gql`
     shop {
         id
         balance
+        newOrderNum
+        onDeliveryOrderNum
+        completedDeliveryOrderNum
+        confirmedOrderNum
+        refundRequestOrderNum
+        exchangeRequestOrderNum
+        refundedOrderNum
+        exchangedOrderNum
     }
     monthlyProfit
   }
 `
 interface DashboardData {
-    shop: {
-        id: number
-        balance: number
-    }
-    monthlyProfit: number[]
+  shop: {
+    id: number
+    balance: number
+    newOrderNum: number
+    onDeliveryOrderNum: number
+    completedDeliveryOrderNum: number
+    confirmedOrderNum: number
+    refundRequestOrderNum: number
+    exchangeRequestOrderNum: number
+    refundedOrderNum: number
+    exchangedOrderNum: number
+  }
+  monthlyProfit: number[]
 }
 interface DashboardVars {
 

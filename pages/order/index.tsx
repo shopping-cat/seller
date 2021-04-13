@@ -74,6 +74,7 @@ const order = () => {
 
     return (
         <Container>
+            <h1 style={{ marginBottom: 24 }} >신규주문, 환불요청, 교환요청 만 관리해주시면 됩니다. 나머지는 자동으로 진행됩니다.</h1>
             <Row gutter={[16, 16]} >
                 {isRefundOrExchange && <RefundExchangeCols />}
 
