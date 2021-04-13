@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 80"
+    "start": "next start",
+    "pm2": "pm2 list && pm2-runtime start pm2.json"
   },
   "dependencies": {
     "@ant-design/charts": "^1.0.21",
@@ -18,6 +19,7 @@
     "firebase": "^8.3.0",
     "graphql": "^15.5.0",
     "next": "10.0.8",
+    "pm2": "^4.5.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-highlight-words": "^0.17.0",
