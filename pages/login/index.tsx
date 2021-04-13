@@ -1,4 +1,5 @@
 import { Button, Checkbox, Form, Input } from 'antd'
+import { useRouter } from 'next/dist/client/router'
 import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import { auth } from '../../lib/firebase'
@@ -18,8 +19,11 @@ const FormContainer = styled(Form)`
 
 const login = () => {
 
+    const { replace } = useRouter()
+
     const onFinish = useCallback(async (v) => {
         await auth.signInWithEmailAndPassword(v.email, v.password)
+        replace('/dashboard')
     }, [])
 
 
