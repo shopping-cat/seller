@@ -4,9 +4,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { CATEGORY } from '../../../constants/value'
 import ItemImageUpload from '../../../components/Upload/ItemImageUpload'
-import { CreateItemImage } from '../../../graphql/itemImage'
 import renderHTML from 'react-render-html';
-import { useCreateItem, useItem, useUpdateItem } from '../../../graphql/item'
+import { useItem, useUpdateItem } from '../../../graphql/item'
 import { useRouter } from 'next/dist/client/router'
 import LoadingView from '../../../components/View/LoadingView'
 import generateHTML from '../../../lib/generateHTML'
@@ -37,8 +36,8 @@ const edit = () => {
     const [updateItem, { loading: updateLoading }] = useUpdateItem()
 
     const onFinish = useCallback(async (v) => {
-        const category1 = v.category[0] !== '기타' ? v.category[0] : null
-        const category2 = v.category.length > 1 ? v.category[1] !== '기타' ? v.category[1] : null : null
+        const category1 = v.category[0]
+        const category2 = v.category.length > 1 ? v.category[1] : null
 
         const input = {
             id: Number(query.id),
@@ -106,7 +105,7 @@ const edit = () => {
                 >
                     <Cascader
                         placeholder='카테고리를 골라주세요'
-                        options={[...CATEGORY, null].map(c1 => ({ label: c1?.category || '기타', value: c1?.category || null, children: c1?.detailCategory && [...c1.detailCategory, null].map(c2 => ({ label: c2 || '기타', value: c2 })) }))}
+                        options={CATEGORY.map(c1 => ({ label: c1?.category, value: c1?.category, children: c1?.detailCategory && c1.detailCategory.map(c2 => ({ label: c2, value: c2 })) }))}
                     />
                 </Form.Item>
                 <h1>가격</h1>
