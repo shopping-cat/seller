@@ -24,9 +24,5 @@ export const CATEGORY = [
     {
         category: '용품',
         detailCategory: ['급식기/급수기', '정수기/자동급식기', '캣타워', '캣휠', '사료통', '울타리', '기타']
-    },
-    {
-        category: '기타',
-        detailCategory: null
     }
 ]
