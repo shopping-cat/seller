@@ -86,7 +86,7 @@ const add = () => {
             <Form
                 initialValues={{
                     deliveryPrice: 2500,
-                    extraDeliveryPrice: 2500
+                    extraDeliveryPrice: 8000
                 }}
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}
