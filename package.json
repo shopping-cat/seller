@@ -23,7 +23,7 @@
     "react-highlight-words": "^0.17.0",
     "react-render-html": "^0.6.0",
     "react-sortable-hoc": "^2.0.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.3"
   },
   "devDependencies": {
     "@types/apollo-upload-client": "^14.1.0",
