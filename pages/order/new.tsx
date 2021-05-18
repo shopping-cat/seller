@@ -4,6 +4,8 @@ import LoadingView from '../../components/View/LoadingView'
 import { useNewOrders, useRegistDelivery, useCancelOrder } from '../../graphql/order'
 import useRefreshing from '../../hooks/useRefreshing'
 
+const list = require('../../assets/deliveryCompanyList.json')
+
 const newOrder = () => {
 
     const { data, fetchMore, loading, refetch } = useNewOrders()
@@ -76,9 +78,9 @@ const newOrder = () => {
                             if (r.state === '배송중') return <div>배송중</div>
                             if (r.state !== '구매접수') return <div>송장등록불가능</div>
                             return <Form onFinish={(v) => onDelivery({ id: r.id, ...v })}  >
-                                <Form.Item name='deliveryCompany' style={{ margin: 0 }} rules={[{ required: true }]} >
+                                <Form.Item name='deliveryCompanyCode' style={{ margin: 0 }} rules={[{ required: true }]} >
                                     <Select placeholder='택배사' >
-                                        <Select.Option value='1' >1</Select.Option>
+                                        {list.data.map(v => <Select.Option value={v.Code} >{v.Name}</Select.Option>)}
                                     </Select>
                                 </Form.Item >
                                 <Form.Item name='deliveryNumber' style={{ margin: 0 }} rules={[{ required: true }]} >

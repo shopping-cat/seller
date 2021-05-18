@@ -108,36 +108,37 @@ const edit = () => {
                         options={CATEGORY.map(c1 => ({ label: c1?.category, value: c1?.category, children: c1?.detailCategory && c1.detailCategory.map(c2 => ({ label: c2, value: c2 })) }))}
                     />
                 </Form.Item>
-                <h1>가격</h1>
-                <Form.Item
-                    label="가격"
-                    name="price"
-                    rules={[{ required: true, message: '필수 입력란입니다.' }, { type: 'number', message: '숫자만 입력가능합니다' }]}
-                >
-                    <InputNumber style={{ width: '50%' }} min={1} />
-                </Form.Item>
-                <Form.Item
-                    label="세일"
-                    name="sale"
-                    rules={[{ required: true, message: '필수 입력란입니다.' }, { type: 'number', message: '숫자만 입력가능합니다' }]}
-                >
-                    <InputNumber disabled={data.item.state === '상품등록요청'} style={{ width: '50%' }} min={0} max={99} />
-                </Form.Item>
-                <Form.Item
-                    label="배송비"
-                    name="deliveryPrice"
-                    rules={[{ type: 'number', message: '숫자만 입력가능합니다' }]}
-                >
-                    <InputNumber style={{ width: '50%' }} min={0} />
-                </Form.Item>
-                <Form.Item
-                    label="산간지역 추가 배송비"
-                    name="extraDeliveryPrice"
-                    rules={[{ type: 'number', message: '숫자만 입력가능합니다' }]}
-                >
-                    <InputNumber style={{ width: '50%' }} min={1} />
-                </Form.Item>
-
+                <>
+                    <h1>가격</h1>
+                    <Form.Item
+                        label="가격"
+                        name="price"
+                        rules={[{ required: true, message: '필수 입력란입니다.' }, { type: 'number', message: '숫자만 입력가능합니다' }]}
+                    >
+                        <InputNumber style={{ width: '50%' }} min={1} />
+                    </Form.Item>
+                    <Form.Item
+                        label="세일"
+                        name="sale"
+                        rules={[{ required: true, message: '필수 입력란입니다.' }, { type: 'number', message: '숫자만 입력가능합니다' }]}
+                    >
+                        <InputNumber disabled={data.item.state === '상품등록요청'} style={{ width: '50%' }} min={0} max={99} />
+                    </Form.Item>
+                    <Form.Item
+                        label="배송비"
+                        name="deliveryPrice"
+                        rules={[{ type: 'number', message: '숫자만 입력가능합니다' }]}
+                    >
+                        <InputNumber style={{ width: '50%' }} min={0} />
+                    </Form.Item>
+                    <Form.Item
+                        label="산간지역 추가 배송비"
+                        name="extraDeliveryPrice"
+                        rules={[{ type: 'number', message: '숫자만 입력가능합니다' }]}
+                    >
+                        <InputNumber style={{ width: '50%' }} min={1} />
+                    </Form.Item>
+                </>
                 <h1>상품 옵션</h1>
                 <Form.List
                     name="option"

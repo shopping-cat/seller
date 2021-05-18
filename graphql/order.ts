@@ -182,8 +182,8 @@ export const useNewOrders = createQueryHook<NewOrdersData, NewOrdersVars>(NEW_OR
 
 
 export const REGIST_DELIVERY = gql`
-  mutation($id:Int!, $deliveryNumber:String!, $deliveryCompany:String!) {
-    registDelivery(id:$id, deliveryNumber:$deliveryNumber, deliveryCompany:$deliveryCompany) {
+  mutation($id:Int!, $deliveryNumber:String!, $deliveryCompanyCode:String!) {
+    registDelivery(id:$id, deliveryNumber:$deliveryNumber, deliveryCompanyCode:$deliveryCompanyCode) {
         id
         state
     }
@@ -200,7 +200,7 @@ interface RegistDeliveryData {
 interface RegistDeliveryVars {
     id: number
     deliveryNumber: string
-    deliveryCompany: string
+    deliveryCompanyCode: string
 }
 export const useRegistDelivery = createMutationHook<RegistDeliveryData, RegistDeliveryVars>(REGIST_DELIVERY)
 
