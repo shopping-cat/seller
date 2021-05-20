@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { CreateItemImage, useCreateItemImage } from '../../graphql/itemImage'
 import { SortableContainer, SortableElement, SortEndHandler } from 'react-sortable-hoc';
 import arrayMove from 'array-move'
+import imageCompression from 'browser-image-compression';
+
 
 const Img = styled.img`
     width: 100px;
@@ -52,7 +54,10 @@ const ItemImageUpload: React.FC<ItemImageUploadProps> = ({ onChange, value }) =>
     const onInput: ChangeEventHandler<HTMLInputElement> = useCallback(async ({ target }) => {
         for (const file of target.files) {
             try {
-                const { data } = await createItemImage({ variables: { image: file } })
+                const compressedFile = await imageCompression(file, {
+                    maxSizeMB: 10
+                })
+                const { data } = await createItemImage({ variables: { image: compressedFile } })
                 setImages(images => [...images, data.createItemImage])
             } catch (error) {
                 console.log(error)

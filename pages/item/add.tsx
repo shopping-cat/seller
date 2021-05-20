@@ -352,7 +352,7 @@ const add = () => {
                     )}
                 </Form.List>
                 <Form.Item
-                    label='사진'
+                    label='사진(최대 9개 | 10MB)'
                     name='images'
                     rules={[
                         {
