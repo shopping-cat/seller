@@ -1,10 +1,9 @@
 import { Button, Form, Input, Select, Space, Table } from 'antd'
 import React, { useCallback } from 'react'
 import LoadingView from '../../components/View/LoadingView'
+import { DELIVERY_COMPANY_LIST } from '../../constants/value'
 import { useNewOrders, useRegistDelivery, useCancelOrder } from '../../graphql/order'
 import useRefreshing from '../../hooks/useRefreshing'
-
-const list = require('../../assets/deliveryCompanyList.json')
 
 const newOrder = () => {
 
@@ -80,7 +79,7 @@ const newOrder = () => {
                             return <Form onFinish={(v) => onDelivery({ id: r.id, ...v })}  >
                                 <Form.Item name='deliveryCompanyCode' style={{ margin: 0 }} rules={[{ required: true }]} >
                                     <Select placeholder='택배사' >
-                                        {list.data.map(v => <Select.Option value={v.Code} >{v.Name}</Select.Option>)}
+                                        {DELIVERY_COMPANY_LIST.map(v => <Select.Option value={v.id} >{v.name}</Select.Option>)}
                                     </Select>
                                 </Form.Item >
                                 <Form.Item name='deliveryNumber' style={{ margin: 0 }} rules={[{ required: true }]} >

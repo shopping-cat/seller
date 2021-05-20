@@ -1,3 +1,5 @@
+import getDeliveryCompanyList, { DeliveryCompany } from "../lib/getDeliveryCompanyList"
+
 export const LAYOUT_BLACK_LIST = ['login']
 
 export const CATEGORY = [
@@ -26,3 +28,6 @@ export const CATEGORY = [
         detailCategory: ['급식기/급수기', '정수기/자동급식기', '캣타워', '캣휠', '사료통', '울타리', '기타']
     }
 ]
+
+export let DELIVERY_COMPANY_LIST: DeliveryCompany[] = []
+getDeliveryCompanyList().then(v => DELIVERY_COMPANY_LIST = v)
