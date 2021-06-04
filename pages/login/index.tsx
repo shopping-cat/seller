@@ -1,8 +1,10 @@
 import { Button, Checkbox, Form, Input } from 'antd'
 import { useRouter } from 'next/dist/client/router'
+import Link from 'next/link'
 import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import { auth } from '../../lib/firebase'
+import firebase from 'firebase'
 
 const Container = styled.div`
     width: 100vw;
@@ -22,6 +24,7 @@ const login = () => {
     const { replace } = useRouter()
 
     const onFinish = useCallback(async (v) => {
+        await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         await auth.signInWithEmailAndPassword(v.email, v.password)
         replace('/dashboard')
     }, [])
@@ -61,6 +64,7 @@ const login = () => {
                 </Form.Item>
                 <Form.Item >
                     <Button type="primary" htmlType="submit">로그인</Button>
+                    <Link href='/signup' ><a><Button type='default' >회원가입</Button></a></Link>
                 </Form.Item>
             </FormContainer>
         </Container>

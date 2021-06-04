@@ -2,7 +2,7 @@ import { Button, Image, Upload } from 'antd'
 import imageCompression from 'browser-image-compression'
 import React, { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { useUploadShopImage } from '../../graphql/shop'
+import { useUploadEtcImage } from '../../graphql/shop'
 
 const Input = styled.input`
     width: 0;
@@ -15,18 +15,18 @@ const Img = styled(Image)`
     object-fit:cover;
 `
 
-interface ShopImageUploadProps {
+interface EtcImageUploadProps {
     value?: string
     onChange?: (v: string) => void
 }
 
 
-const ShopImageUpload: React.FC<ShopImageUploadProps> = ({ value, onChange }) => {
+const EtcImageUpload: React.FC<EtcImageUploadProps> = ({ value, onChange }) => {
 
     const ref = useRef<HTMLInputElement>(null)
 
     const [image, setImage] = useState(value || '')
-    const [uploadShopImage, { loading }] = useUploadShopImage()
+    const [uploadEtcImage, { loading }] = useUploadEtcImage()
 
     const onInput: ChangeEventHandler<HTMLInputElement> = useCallback(async ({ target }) => {
         try {
@@ -34,15 +34,15 @@ const ShopImageUpload: React.FC<ShopImageUploadProps> = ({ value, onChange }) =>
             const compressedFile = await imageCompression(file, {
                 maxSizeMB: 2
             })
-            const { data } = await uploadShopImage({ variables: { image: compressedFile } })
-            setImage(data.uploadShopImage)
+            const { data } = await uploadEtcImage({ variables: { image: compressedFile } })
+            setImage(data.uploadEtcImage)
         } catch (error) {
 
         }
     }, [])
 
     useEffect(() => {
-        if (!onchange || !image) return
+        if (!onChange || !image) return
         onChange(image)
     }, [image])
 
@@ -69,4 +69,4 @@ const ShopImageUpload: React.FC<ShopImageUploadProps> = ({ value, onChange }) =>
     )
 }
 
-export default ShopImageUpload
+export default EtcImageUpload

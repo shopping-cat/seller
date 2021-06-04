@@ -1,6 +1,7 @@
 import getDeliveryCompanyList, { DeliveryCompany } from "../lib/getDeliveryCompanyList"
 
-export const LAYOUT_BLACK_LIST = ['login']
+export const LAYOUT_BLACK_LIST = ['login', 'signup']
+export const LOGIN_WHITE_LIST = ['/login', '/signup']
 
 export const CATEGORY = [
     {

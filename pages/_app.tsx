@@ -9,7 +9,7 @@ import { auth } from '../lib/firebase'
 import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-
+import { LOGIN_WHITE_LIST } from '../constants/value'
 
 
 
@@ -30,6 +30,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
 
 export default App
 
+
+
 const AppContainer: React.FC = ({ children }) => {
 
   const { replace, asPath } = useRouter()
@@ -39,7 +41,7 @@ const AppContainer: React.FC = ({ children }) => {
     setLogedIn(!!user)
     console.log(user ? 'loggedin' : 'loggedout')
     if (!user) {
-      replace('/login')
+      if (!LOGIN_WHITE_LIST.includes(asPath)) replace('/login')
     } else if (user && asPath === '/login') {
       replace('/dashboard')
     }
@@ -51,7 +53,7 @@ const AppContainer: React.FC = ({ children }) => {
     return loginListner
   }, [])
 
-  if (!logedIn && asPath !== '/login') return null
+  if (!logedIn && !LOGIN_WHITE_LIST.includes(asPath)) return null
 
   return (
     <>
