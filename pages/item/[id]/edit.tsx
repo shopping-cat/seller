@@ -1,5 +1,5 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, Cascader, Form, Input, InputNumber, Space, TreeSelect, Upload } from 'antd'
+import { Button, Cascader, Form, Input, InputNumber, Select, Space, TreeSelect, Upload } from 'antd'
 import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { CATEGORY } from '../../../constants/value'
@@ -51,7 +51,8 @@ const edit = () => {
             option: v.option ? { data: v.option } : null,
             requireInformation: { data: v.requireInformation },
             images: v.images.map((v: any) => v.id),
-            html: v.html
+            html: v.html,
+            type: v.type
         }
         if (data.item.state !== '상품등록요청') alert('영업일로부터 3일 이내에 검토후 게시됩니다.')
         try {
@@ -97,6 +98,17 @@ const edit = () => {
                     rules={[{ required: true, message: '필수 입력란입니다.', }]}
                 >
                     <Input />
+                </Form.Item>
+                <Form.Item
+                    label="타입"
+                    name="type"
+                    rules={[{ required: true, message: '필수 입력란입니다.', }]}
+                >
+                    <Select>
+                        <Select.Option value='cat' >고양이</Select.Option>
+                        <Select.Option value='dog' >강아지</Select.Option>
+                        <Select.Option value='both' >고양이,강아지</Select.Option>
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     label="카테고리"

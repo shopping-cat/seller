@@ -6,9 +6,9 @@ import moneyFormat from '../../lib/moneyFormat';
 import Link from 'next/link';
 import Highlighter from 'react-highlight-words';
 import Search from 'antd/lib/input/Search';
-import { LoadingOutlined } from '@ant-design/icons';
 import LoadingView from '../../components/View/LoadingView';
 import useRefreshing from '../../hooks/useRefreshing';
+import itemTypeToKorean from '../../lib/itemTypeToKorean';
 
 const { Option } = Select
 
@@ -132,6 +132,27 @@ const item = () => {
                         ,
                         onFilter: (value, record) => record.state === value,
                         align: 'center'
+                    },
+                    {
+                        title: '타입',
+                        dataIndex: 'type',
+                        render: (v) => <div>{itemTypeToKorean(v)}</div>,
+                        align: 'center',
+                        filters: [
+                            {
+                                text: '고양이',
+                                value: 'cat'
+                            },
+                            {
+                                text: '강아지',
+                                value: 'dog'
+                            },
+                            {
+                                text: '고양이,강아지',
+                                value: 'both'
+                            },
+                        ],
+                        onFilter: (value, record) => record.state === value,
                     },
                     {
                         title: '총 구매확정',

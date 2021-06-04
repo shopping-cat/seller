@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { ItemState, ItemRequireInformation, ItemOption } from "../constants/type";
+import { ItemState, ItemRequireInformation, ItemOption, ItemType } from "../constants/type";
 import { createMutationHook, createQueryHook } from "../lib/createApolloHook";
 
 // QUERY/ITEM
@@ -10,6 +10,7 @@ export const ITEM = gql`
         name
         likeNum
         state
+        type
         deliveryPrice
         extraDeliveryPrice
         sale
@@ -40,6 +41,7 @@ export const ITEM = gql`
             html
             category1
             category2
+            type
             images {
                 id
                 uri
@@ -53,6 +55,7 @@ export interface ItemDetail {
     name: string
     likeNum: number
     state: ItemState
+    type: ItemType
     deliveryPrice: number
     extraDeliveryPrice: number
     price: number
@@ -83,6 +86,7 @@ export interface ItemDetail {
         html: string
         category1: string | null
         category2: string | null
+        type: ItemType
         images: {
             id: number
             uri: string
@@ -106,6 +110,7 @@ export const ITEMS = gql`
         createdAt
         likeNum
         state
+        type
         price
         deliveryPrice
         isFreeDelivery
@@ -125,6 +130,7 @@ export interface Item {
     createdAt: Date
     likeNum: number
     state: ItemState
+    type: ItemType
     price: number
     deliveryPrice: number
     isFreeDelivery: boolean
@@ -163,6 +169,7 @@ interface CreateItemVars {
         name: string
         category1: string | null
         category2: string | null
+        type: ItemType
         price: number
         deliveryPrice: number
         extraDeliveryPrice: number
@@ -182,6 +189,7 @@ export const UPDATE_ITEM = gql`
         id
         name
         state
+        type
         category1
         category2
         sale
@@ -210,6 +218,7 @@ interface UpdateItemVars {
         name: string
         category1: string | null
         category2: string | null
+        type: ItemType
         price: number
         sale: number
         deliveryPrice: number

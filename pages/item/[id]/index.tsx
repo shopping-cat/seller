@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import LoadingView from '../../../components/View/LoadingView'
 import { useDeleteItemUpdate, useItem } from '../../../graphql/item'
 import generateHTML from '../../../lib/generateHTML'
+import itemTypeToKorean from '../../../lib/itemTypeToKorean'
 import moneyFormat from '../../../lib/moneyFormat'
 
 const ContentContainer = styled.div`
@@ -79,8 +80,9 @@ const itemDetail = () => {
                         <Descriptions title='상품정보' bordered style={{ marginTop: 32 }} >
                             <Descriptions.Item span={3} label='상품명' >{data.item.updateItem.name}</Descriptions.Item>
 
-                            <Descriptions.Item span={1.5} label='카테고리2' >{data.item.updateItem.category1 || '기타'}</Descriptions.Item>
-                            <Descriptions.Item span={1.5} label='카테고리1' >{data.item.updateItem.category2 || '기타'}</Descriptions.Item>
+                            <Descriptions.Item label='타입' >{itemTypeToKorean(data.item.updateItem.type)}</Descriptions.Item>
+                            <Descriptions.Item label='카테고리2' >{data.item.updateItem.category1 || '기타'}</Descriptions.Item>
+                            <Descriptions.Item label='카테고리1' >{data.item.updateItem.category2 || '기타'}</Descriptions.Item>
                         </Descriptions>
 
                         <Descriptions title='가격' bordered style={{ marginTop: 32 }} >
@@ -147,8 +149,9 @@ const itemDetail = () => {
                         <Descriptions.Item label='좋아요 수' >{moneyFormat(data.item.likeNum)}</Descriptions.Item>
                         <Descriptions.Item label='리뷰 수' ><Link href={asPath + '/review'} ><a>{moneyFormat(data.item.reviewNum)}</a></Link></Descriptions.Item>
 
-                        <Descriptions.Item span={1.5} label='카테고리2' >{data.item.category1 || '기타'}</Descriptions.Item>
-                        <Descriptions.Item span={1.5} label='카테고리1' >{data.item.category2 || '기타'}</Descriptions.Item>
+                        <Descriptions.Item label='타입' >{itemTypeToKorean(data.item.type)}</Descriptions.Item>
+                        <Descriptions.Item label='카테고리2' >{data.item.category1 || '기타'}</Descriptions.Item>
+                        <Descriptions.Item label='카테고리1' >{data.item.category2 || '기타'}</Descriptions.Item>
                     </Descriptions>
 
                     <Descriptions title='가격' bordered style={{ marginTop: 32 }} >
