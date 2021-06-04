@@ -7,6 +7,9 @@ import Layout from '../components/Layout'
 import { client } from '../lib/apollo'
 import { auth } from '../lib/firebase'
 import 'antd/dist/antd.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 
 
@@ -17,6 +20,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         <AppContainer>
           <Layout>
             <Component {...pageProps} />
+            <ToastContainer />
           </Layout>
         </AppContainer>
       </ApolloProvider>

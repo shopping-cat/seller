@@ -1,4 +1,5 @@
 import { Image, Upload } from 'antd'
+import imageCompression from 'browser-image-compression'
 import React, { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useUploadShopImage } from '../../graphql/shop'
@@ -30,7 +31,10 @@ const ShopImageUpload: React.FC<ShopImageUploadProps> = ({ value, onChange }) =>
     const onInput: ChangeEventHandler<HTMLInputElement> = useCallback(async ({ target }) => {
         try {
             const file = target.files[0]
-            const { data } = await uploadShopImage({ variables: { image: file } })
+            const compressedFile = await imageCompression(file, {
+                maxSizeMB: 2
+            })
+            const { data } = await uploadShopImage({ variables: { image: compressedFile } })
             setImage(data.uploadShopImage)
         } catch (error) {
 

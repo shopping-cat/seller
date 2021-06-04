@@ -55,7 +55,7 @@ const ItemImageUpload: React.FC<ItemImageUploadProps> = ({ onChange, value }) =>
         for (const file of target.files) {
             try {
                 const compressedFile = await imageCompression(file, {
-                    maxSizeMB: 10
+                    maxSizeMB: 2
                 })
                 const { data } = await createItemImage({ variables: { image: compressedFile } })
                 setImages(images => [...images, data.createItemImage])

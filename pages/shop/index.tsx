@@ -1,9 +1,11 @@
 import { Button, Descriptions, Image } from 'antd'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
+import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import LoadingView from '../../components/View/LoadingView'
 import { useShop } from '../../graphql/shop'
+import { auth } from '../../lib/firebase'
 
 
 const Container = styled.div`
@@ -15,18 +17,28 @@ const shop = () => {
 
     const { data, loading } = useShop()
 
+    const onChangePW = useCallback(async () => {
+        try {
+
+            await auth.sendPasswordResetEmail(data.shop.seller.email)
+            toast(`${data.shop.seller.email}로 비밀번호 변경 링크가 발송되았습니다.`)
+        } catch (error) {
+            toast('이메일 보내기 실패')
+        }
+    }, [data])
+
 
     if (loading) return <LoadingView />
 
     return (
         <Container>
             <Descriptions title='상점정보' extra={<Link href='/shop/edit'><a><Button type='primary' >수정</Button></a></Link>} bordered >
-                <Descriptions.Item span={1.5} label='상점이름' >{data.shop.shopName}</Descriptions.Item>
-                <Descriptions.Item span={1.5} label='이메일' >{data.shop.seller.email}</Descriptions.Item>
+                <Descriptions.Item span={1} label='상점이름' >{data.shop.shopName}</Descriptions.Item>
+                <Descriptions.Item span={1} label='이메일' >{data.shop.seller.email}</Descriptions.Item>
+                <Descriptions.Item span={1} label='비밀번호 변경' ><Button onClick={onChangePW} >{data.shop.seller.email}로 비밀번호 변경 링크 보내기</Button></Descriptions.Item>
 
                 <Descriptions.Item span={1.5} label='사업자등록번호' >{data.shop.seller.licenseNumber}</Descriptions.Item>
                 <Descriptions.Item span={1.5} label='카카오톡 아이디 (주문 들어오면 채팅 보내드립니다)' >{data.shop.kakaoId}</Descriptions.Item>
-
 
 
                 <Descriptions.Item span={1.5} label='평점' >{data.shop.rate}({data.shop.rateNum})</Descriptions.Item>
