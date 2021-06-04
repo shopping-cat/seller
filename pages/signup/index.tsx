@@ -57,7 +57,7 @@ const signup = () => {
             alert(`검토 후 ${d.createShop.seller.email}로 승인 메일 보내드리겠습니다.`)
             replace('/login')
         } catch (error) {
-            toast(error.message)
+            // toast(error.message)
         }
     }, [])
 

@@ -112,6 +112,27 @@ const edit = () => {
                 >
                     <Input />
                 </Form.Item>
+
+                <h1>담당자</h1>
+                <Form.Item
+                    name='managerName'
+                    label='이름'
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name='managerPhone'
+                    label='전화번호'
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name='managerEmail'
+                    label='이메일'
+                >
+                    <Input />
+                </Form.Item>
+
                 <h1>CS</h1>
                 <Form.Item
                     name='kakaoLink'
