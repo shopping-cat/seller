@@ -20,8 +20,8 @@ export const SHOP = gql`
         bankOwnerName
         kakaoId
         managerName
-            managerPhone
-            managerEmail
+        managerPhone
+        managerEmail
         seller {
             id
             email

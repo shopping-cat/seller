@@ -31,7 +31,7 @@ const edit = () => {
 
     const [html, setHtml] = useState('') // html 렌더링 용도
 
-    const { data, loading } = useItem({ variables: { id: Number(query.id) } })
+    const { data, loading } = useItem({ variables: { id: Number(query.id) }, fetchPolicy: 'network-only' })
 
     const [updateItem, { loading: updateLoading }] = useUpdateItem()
 
