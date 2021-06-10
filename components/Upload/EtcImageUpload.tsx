@@ -32,7 +32,7 @@ const EtcImageUpload: React.FC<EtcImageUploadProps> = ({ value, onChange }) => {
         try {
             const file = target.files[0]
             const compressedFile = await imageCompression(file, {
-                maxSizeMB: 2
+                maxSizeMB: 1
             })
             const { data } = await uploadEtcImage({ variables: { image: compressedFile } })
             setImage(data.uploadEtcImage)

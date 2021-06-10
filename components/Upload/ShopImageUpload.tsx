@@ -32,7 +32,7 @@ const ShopImageUpload: React.FC<ShopImageUploadProps> = ({ value, onChange }) =>
         try {
             const file = target.files[0]
             const compressedFile = await imageCompression(file, {
-                maxSizeMB: 2
+                maxSizeMB: 1
             })
             const { data } = await uploadShopImage({ variables: { image: compressedFile } })
             setImage(data.uploadShopImage)
@@ -42,7 +42,8 @@ const ShopImageUpload: React.FC<ShopImageUploadProps> = ({ value, onChange }) =>
     }, [])
 
     useEffect(() => {
-        if (!onchange || !image) return
+        if (!onChange || !image) return
+        console.log(image)
         onChange(image)
     }, [image])
 

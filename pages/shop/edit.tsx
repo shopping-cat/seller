@@ -50,6 +50,7 @@ const edit = () => {
 
     const onFinish = useCallback(async (v) => {
         try {
+            console.log(v)
             await updateShop({
                 variables: {
                     input: v
